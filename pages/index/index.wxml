@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+<image src="http://ouao6zxy5.bkt.clouddn.com/wl2MY"  style="height:{{bgheight}}px;width:{{bgwidth}}px" ></image>
+<view class='bigheader_ fd'>XX租车</view>
+<view class='header_ fd'>让您的汽车租赁更方便</view>
+<view class="body_1">
+   <view class="location">
+    <i class='fa fa-map-marker'></i>
+    <span>{{location}}</span>
+   </view>
+   <view class='calendar'>
+     <view class='time_'>
+        <span>预约时间</span>
+        <span><image src="../../img/rl.png" class='rl' bindtap="getTime"></image></span>
+     </view>
+     <view class='time_ border_left'>
+        <span>单数</span>
+        <span class="blue">2</span>
+     </view>
+   </view>
+   <view>
+     <button  class='button' size='default' bindtap="chosecar">预约车辆</button>
+   </view>
+</view>
+</view>

@@ -1,0 +1,38 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/calendar/calendar",
+    "pages/carlist/carlist"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "XXXX有限公司",
+    "navigationBarTextStyle":"black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "XXXX有限公司",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#000000",
+    "selectedColor": "#66b1ff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "selectedIconPath":"img/home2.png",
+        "iconPath":"img/home1.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "订单",
+        "selectedIconPath": "img/order2.png",
+        "iconPath": "img/order1.png"
+      }
+    ]
+  }
+}
