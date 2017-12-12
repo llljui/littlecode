@@ -1,0 +1,34 @@
+page{-webkit-overflow-scrolling:touch;overflow-y:scroll;}
+.paylist{
+height: 90vh;
+width: 100%;
+}
+.footer{
+  position: fixed;bottom: 0;
+height: 10vh;
+width: 100%;
+border-top: 1px solid #ddd;
+background-color: white;
+}
+.paylist ul li{margin-top: 1vh;box-shadow: 0 0 5px #D8DCE5;}
+.paylist ul li:first-child{margin-top: 0vh}
+.paylist ul li:last-child{margin-bottom: 10vh;}
+.paylist ul li,.paylist ul li text{display: block;}
+.payico{width: 60rpx;height: 60rpx;display: inline-block;}
+.pay_1{width: 100%;height: 21vh;border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;}
+.pay_2{width: 100%;height: 8vh;border-bottom: 1px solid #ddd;line-height: 8vh;font-family: '宋体';font-size: 30rpx;text-indent:1em;}
+.pay_3{width: 100%;height: 10vh;border-bottom: 1px solid #ddd;}
+.pay_3 image{display: inline-block;width:60rpx;height: 60rpx;vertical-align: middle;margin-left:0.5em;}
+.pay_3 b{line-height: 10vh;font-family: '宋体';}
+.grodio{display: inline-block;float: right;vertical-align: middle;margin-top: 2.7vh;}
+.footer view:first-child{display: inline-block;float: left;text-align: left;line-height:10vh;text-indent:1em;font-family:'宋体';font-size:24rpx;}
+.footer view:last-child{display: inline-block;float: right;text-align: right;line-height:10vh;font-family:'宋体';font-size:24rpx;}
+.footer view text{font-family:'宋体';font-size:34rpx;}
+.money{ font-size:30rpx;width:50%;color:#FF4040;font-size:50rpx!important;font-family:'宋体';}
+.payit{height: 6vh;vertical-align: middle;background: red;color: white;margin-right: 1vw;line-height: 6vh!important;}
+.payit.button-hover{background-color:#933434;}
+.pay_1_1{margin-top: 1vh;display: block;font-family:'宋体'!important;font-size:40rpx!important;text-indent:0.7em;line-height: 5vh;}
+.pay_1_2,.pay_1_3{display: inline-block!important;width:50%;font-family:'宋体'!important;font-size:30rpx!important;text-indent: 1em;line-height: 5vh;color: #878D99;}
+.pay_1_3{text-align: center;}
+.pay_1_4,.pay_1_5{display: block;font-family:'宋体'!important;font-size:30rpx!important;text-indent: 1em;line-height: 5vh;color: #878D99;}
+.pay_1_5{padding-bottom:1vh; }

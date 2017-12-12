@@ -1,0 +1,24 @@
+<view class='paylist'>
+  <ul>
+    <li wx:for="{{user_order_detail}}" wx:key="{{index}}">
+      <text class='pay_1'>
+        <text class='pay_1_1'>奔驰XXX</text>
+        <text class='pay_1_2'>借车时间：2017-10-10</text><text class='pay_1_2'>还车时间：2017-10-18</text>
+        <text class='pay_1_4'>申请人：李XX</text>
+        <text class='pay_1_5'>身份证：33032719*******294</text>
+      </text>
+      <text class='pay_2'>请选择支付方式</text>
+      <view class='pay_3'>
+        <image src="../../img/wxpay.jpg"></image>
+        <b>微信支付</b>
+       <checkbox-group name="radio-group" class="grodio" bindchange="radioChange" data-id="{{index}}">
+            <label><checkbox  value="radio1" checked="{{item.ck_}}" /></label>
+       </checkbox-group>
+      </view>
+    </li>
+  </ul>
+</view>
+<view class='footer'>
+  <view><text>需支付:</text><text class='money'>1680</text>.00元</view>
+  <view><button type='danger' size='mini' class='payit'>立即支付</button></view>
+</view>

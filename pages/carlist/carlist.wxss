@@ -11,7 +11,7 @@ page{overflow-y: auto}
 .v2 text{display: block;width: 100%;text-align:left;font-family: '宋体';font-weight: normal;font-size: 30rpx;line-height: 3.5vh;white-space:nowrap;overflow:hidden;color:#5A5E66; text-overflow: ellipsis;}
 .v3_1,.v3_2{display: block;height: 50%;}
 .v3_2{line-height: 7.5vh;font-weight: normal;font-family:'宋体'}
-.v3_btn{background-color: #409EFF;color: white;}
+.v3_btn{background-color: #40afFF;color: white;}
 .button-hover {
   background-color: #01689e;
 }

@@ -61,3 +61,12 @@
         </picker-view-column>
     </picker-view>
 </view>
+
+<view class='bgbor' bindtap="cancel" style='display:{{bg_show}}'></view>
+<view class="sometext" style='display:{{bg_show}}'>
+
+</view>
+
+
+ <view class="chose_type_1" style='top:{{chose_type1_y}}px;left:{{chose_type1_x}}px ;display:none;'>借</view>
+ <view  class="chose_type_2" style='top:{{chose_type2_y}}px;left:{{chose_type2_x}}px ;display:none;'>还</view>

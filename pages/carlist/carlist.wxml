@@ -24,7 +24,7 @@
         <text>车牌：{{item.carlicense}}</text>
       </view>
     <view class='v3'>
-     <view class='v3_1'><button size="mini" class="v3_btn">选择</button></view>
+     <view class='v3_1'><button size="mini" bindtap="cardetails" class="v3_btn">选择</button></view>
      <view class='v3_2'>价格：{{item.price}}</view>
     </view>
   </view>

@@ -1,9 +1,11 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
+    "pages/details/details",
     "pages/calendar/calendar",
-    "pages/carlist/carlist"
+    "pages/carlist/carlist",
+    "pages/order/order",
+    "pages/pay/pay"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -28,7 +30,7 @@
         "iconPath":"img/home1.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/order/order",
         "text": "订单",
         "selectedIconPath": "img/order2.png",
         "iconPath": "img/order1.png"
