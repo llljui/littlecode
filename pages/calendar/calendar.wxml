@@ -1,4 +1,4 @@
-<view class="flex box box-tb box-align-center .scrool_">
+<view class="flex box box-tb box-align-center .scrool_" bindtap='cancel_'>
   <view class="calendar pink-color box box-tb ">
         <view class="top-handle fs40 box box-lr box-align-center box-pack-center">
             <view class="prev box box-rl"  data-hand="1"  data-handle="prev"><!--bindtap="handleCalendar" bindtap="chooseYearAndMonth" -->
@@ -15,14 +15,14 @@
         <view class="days box box-lr box-wrap">
             <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}" >
             </view>
-            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="tapDayItem" data-ptime="1">
+            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" catchtap="tapDayItem" data-ptime="1">
                 <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day}}</view>
             </view>
         </view>
 
         
     </view>
-      <view class="calendar pink-color box box-tb ">
+      <view class="calendar pink-color box box-tb " style='margin-bottom:10vh;'>
         <view class="top-handle fs40 box box-lr box-align-center box-pack-center">
             <view class="prev box box-rl" data-hand="2" data-handle="prev"><!--bindtap="handleCalendar" bindtap="chooseYearAndMonth" -->
                 <view class="prev-handle box box-lr box-align-center box-pack-center"><!--《--></view>
@@ -38,7 +38,7 @@
         <view class="days box box-lr box-wrap">
             <view wx:if="{{hasEmptyGrid2}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids2}}" wx:key="{{index}}" data-idxx="{{index}}" >
             </view>
-            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days2}}" wx:key="{{index}}" data-idxx="{{index}}" bindtap="tapDayItem" data-ptime="2">
+            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days2}}" wx:key="{{index}}" data-idxx="{{index}}" catchtap="tapDayItem" data-ptime="2">
                 <view class="day {{item.choosed2 ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day2}}</view>
             </view>
         </view>
@@ -67,6 +67,21 @@
 
 </view>
 
-
- <view class="chose_type_1" style='top:{{chose_type1_y}}px;left:{{chose_type1_x}}px ;display:none;'>借</view>
- <view  class="chose_type_2" style='top:{{chose_type2_y}}px;left:{{chose_type2_x}}px ;display:none;'>还</view>
+<view class='to_get_car'>
+  <view class='span_50' catchtap="navto1">
+    <view><image src="../../img/home1.png"></image></view>
+    <view class='bor_r'>首页</view>
+  </view>
+  <view class='span_50 ' catchtap="navto2">
+    <view><image src="../../img/commit.png"></image></view>
+    <view class='bor_r'>提交</view>
+  </view>
+</view>
+ <!--<view class="chose_type_1" style='top:{{chose_type1_y}}px;left:{{chose_type1_x}}px ;display:none;'>借</view>-->
+ <!--<view  class="chose_type_2" style='top:{{chose_type2_y}}px;left:{{chose_type2_x}}px ;display:none;'>还</view>-->
+ 
+<!--<view class='propv'  style='top:{{btn_top}}px;left:{{btn_left}}px;display:{{ifshow_}}'>
+ <view class='btn_' hover-class='btn_hover' hover-start-time="40" hover-stay-time="100" catchtap="borrow_">借</view>
+ <view class='btn_' hover-class='btn_hover' hover-start-time="40" hover-stay-time="100" catchtap="back_">还</view>
+ <view class='arrow'></view>
+</view>-->

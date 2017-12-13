@@ -109,7 +109,7 @@ Page({
     })
   },
   getTime:function(){
-   console.log(333);
+   //console.log(333);
    wx.navigateTo({
      url: '../calendar/calendar'
    })

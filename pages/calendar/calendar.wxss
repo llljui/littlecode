@@ -130,3 +130,12 @@ page{background: #17abe3}
 .bgbor,.sometext{position: fixed;left: 0;right: 0;bottom: 0;top: 0;margin: auto;width:100%;height: 100%;opacity: 0.65;background-color: black;}
 .sometext{width: 80vw;height:20vh;opacity: 1;background: white;border-radius: 3px;border: 1px solid #ddd;display: block;z-index: 999;}
 .chose_type_1,.chose_type_2{position: absolute;z-index:998;display: block;height: 4vh;width:7vw;border-radius: 20px;background-color: red;color: white;text-align: center;line-height: 4vh;margin-top: 5vh;font-family:'宋体';font-weight: normal;font-size: 30rpx;}
+.propv{width: 120rpx;height: 40rpx;background: white;border: 1px solid white;border-radius: 6rpx;position:absolute;top: 0;bottom: 0;left:0;right: 0;}
+.btn_{display:inline-block;width: 50rpx;height: 30rpx;text-align: center;border-radius: 6rpx;color: white;font-family: '宋体';font-size:24rpx;line-height: 32rpx;margin:5rpx 0rpx 0 6rpx;float: left;background: #00aCFF;box-shadow: 0 0 5px white;}
+.btn_hover{background-color: #176be3 ;}
+.arrow{position: absolute;width:24rpx;height: 24rpx;transform: rotateZ(45deg);background-color: white;margin: 28rpx 48rpx 0 47rpx;z-index: -1;}
+.to_get_car{position:fixed;bottom: 0;width: 100%;height:8vh;color:black;font-family: '宋体';text-align: center;background-color:white;box-shadow: 0 0 5px #ddd}
+.span_50{display:inline-block;width:49.5%;height: 100%;text-align: center;}
+.bor_r{border-right:1px solid #ddd;line-height: 5vh;}
+.span_50 view{display: block;width: 100%;height: 40%;font-size: 24rpx;line-height: 5vh;color: #878D99}
+.span_50 view image{width:45rpx;height: 100%;vertical-align: middle}

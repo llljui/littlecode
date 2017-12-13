@@ -10,7 +10,13 @@ const conf = {
     chose_type1_x:'0',
     chose_type1_y: '0',
     chose_type2_x: '0',
-    chose_type2_y: '0'
+    chose_type2_y: '0',
+    btn_left: 0,
+    btn_top: 0,
+    ifshow_:"none",
+    page_time:null,
+    borrow1:[],
+    borrow2: []
   },
   onLoad() {
     const date = new Date();
@@ -190,130 +196,115 @@ const conf = {
   },//获取未来时间
   tapDayItem(e) {
     var p_time = e.currentTarget.dataset.ptime;
-    console.log(e)
+    //console.log(e)
     const idx = e.currentTarget.dataset.idx;
     const days = this.data.days;
 
     const idxx = e.currentTarget.dataset.idxx;
     const days2 = this.data.days2;
+    var day_start = '';
+    var day_end = '';
     //点击获取时间以及参宿
     if (p_time=="1"){
       days[idx].choosed = !days[idx].choosed;
-      console.log(days[idx].choosed );
+      const borrow1 = this.data.borrow1;
       if (days[idx].choosed ){
-        
+        try {
+          wx.setStorageSync("cur_month", this.data.cur_month);
+        } catch (e) {
+          console.log(e);
+        }//设置月
+        try {
+          var value = wx.getStorageSync('cur_month');
+          if (value) {
+            borrow1.push(this.data.cur_year + '年' + value + '月' + (idx + 1) + '日');
+            console.log(this.data.cur_year + '年' + value + '月' + (idx + 1) + '日')//
+            console.log(this.data.borrow1);
+            this.setData({
+              borrow1
+            })
+          }
+        } catch (e) {
+          console.log(e)// Do something when catch error
+        }
       }else{
-
+        try {
+          wx.setStorageSync("cur_month", this.data.cur_month);
+        } catch (e) {
+          console.log(e);
+        }//设置月
+        try {
+          var value = wx.getStorageSync('cur_month');
+          if (value) {
+            borrow1.splice(this.return_index(borrow1, this.data.cur_year + '年' + value + '月' + (idx + 1) + '日'),1);
+            console.log(this.data.borrow1)//         
+            this.setData({
+              borrow1
+            })
+          }
+        } catch (e) {
+          console.log(e)// Do something when catch error
+        }
       }//如果是chosed
 
-
-      var day_start = '';
-      var day_end = '';
-      try {
-        wx.setStorageSync("cur_month", this.data.cur_month);
-      } catch (e) {
-        console.log(e);
-      }
-      try {
-        var value = wx.getStorageSync('cur_month')
-        if (value) {
-          console.log(value)// Do something with return value
-        }
-      } catch (e) {
-        // Do something when catch error
-      }
-
-      try {
-        var value = wx.getStorageSync('click_count')
-        if (value) {
-         // console.log(value);
-          if (value % 2 == 0) {
-            day_start = Number(e.currentTarget.dataset.idx+1);
-          } else {
-            day_end = Number(e.currentTarget.dataset.idx+1);
-          }
-          try {
-            wx.setStorageSync("click_count", Number(value) + 1);
-          } catch (e) {
-            console.log(e);
-          }//计数
-        }
-        console.log(day_end-day_start);
-
-        if (day_start&&day_end){
-          if (day_end>day_start){
-            try {
-              wx.setStorageSync("start_time",day_start);
-            } catch (e) {
-              console.log(e);
-            }
-            try {
-              wx.setStorageSync("end_time",day_end);
-            } catch (e) {
-              console.log(e);
-            }
-          }else{
-            try {
-              wx.setStorageSync("end_time", day_start);
-            } catch (e) {
-              console.log(e);
-            }
-            try {
-              wx.setStorageSync("start_time", day_end);
-            } catch (e) {
-              console.log(e);
-            }
-          }
-        }else{
-          console.log('有时间未选择');
-        }
-      } catch (e) {
-        console.log(e);
-      }
+      ///
       this.setData({
         days
       });
-//本月的日历时间
+    //本月的日历时间------------------------------------------------------------------------------------------------
     }else{
       days2[idxx].choosed2 = !days2[idxx].choosed2;
-      try {
-        wx.setStorageSync("nex_month", this.data.nex_month);
-      } catch (e) {
-        console.log(e);
-      }
-      try {
-        var value = wx.getStorageSync('nex_month')
-        if (value) {
-          console.log(value)// Do something with return value
+      const borrow2 = this.data.borrow2;
+      if (days2[idxx].choosed2) {
+        try {
+          wx.setStorageSync("nex_month", this.data.nex_month);
+        } catch (e) {
+          console.log(e);
         }
-      } catch (e) {
-        // Do something when catch error
-      }
-
-      try {
-        var value = wx.getStorageSync('click_count2')
-        if (value) {
-          //console.log(value);
-          if (value % 2 == 0) {
-            // console.log('被2整除');
-
-          } else {
-            //console.log(value % 2)
-          }
-          try {
-            wx.setStorageSync("click_count2", Number(value) + 1);
-          } catch (e) {
-            console.log(e);
-          }
+        try {
+          var value = wx.getStorageSync('nex_month')
+          if (value) {
+           // console.log(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日')// 获取当前时间
+            borrow2.push(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日');
+            console.log(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日')//
+            console.log(this.data.borrow2);
+            this.setData({
+              borrow2
+            })          }
+        } catch (e) {
+          // Do something when catch error
         }
-      } catch (e) {
-        console.log(e);
-      }
+      }else{
+        try {
+          wx.setStorageSync("nex_month", this.data.nex_month);
+        } catch (e) {
+          console.log(e);
+        }//设置月
+        try {
+          var value = wx.getStorageSync('nex_month');
+          if (value) {
+            borrow2.splice(this.return_index(borrow2, this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日'), 1);
+            console.log(this.data.borrow2)//         
+            this.setData({
+              borrow2
+            })
+          }
+        } catch (e) {
+          console.log(e)// Do something when catch error
+        }
+      }    
       this.setData({
         days2
       });
     }
-    //本月的日历时间
+    //下月的日历时间-------------------------------------------------------------------------------------
+    try {
+      wx.setStorageSync("order_time", this.data.borrow1.concat(this.data.borrow2));
+    } catch (e) {
+      console.log(e);
+    }
+    console.log(wx.getStorageSync('order_time'));
+   // -------------------------------------------------------------------------------------------------
   },//点击时间选择
   chooseYearAndMonth(e) {
     const val = e.currentTarget.dataset.val;
@@ -390,6 +381,44 @@ const conf = {
     var self=this;
     self.setData({
       bg_show:'none'
+    })
+  },
+  borrow_:function(){
+    console.log('借');
+    console.log(this.data.page_time);
+    this.setData({
+      ifshow_: "none"
+    })
+  },
+  back_:function(){
+    console.log('还')
+    console.log(this.data.page_time);
+    this.setData({
+      ifshow_: "none"
+    })
+  },
+  cancel_:function(){
+    console.log('body')
+
+  },
+  return_index:function(arr,val){
+    for(let i=0;i<arr.length;i++){
+      if(arr[i]==val){
+        return i;
+      }else{
+        console.log('找不到');
+      }
+    }
+  },
+  navto1:function(){
+    console.log(2);
+    wx.switchTab({
+       url: '../index/index'
+     })
+  },
+  navto2:function(){
+    wx.navigateTo({
+      url: '../carlist/carlist'
     })
   }
 };
