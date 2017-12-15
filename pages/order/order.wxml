@@ -1,1 +1,32 @@
-<button bindtap="topay" type="primary">预定</button>
+<view class='header_'>
+  <view class='span_33'>全部</view>
+  <view class='span_33'>代付款</view>
+  <view class='span_33'>用车中</view>
+</view>
+<view style='margin-top: 6.5vh;'>
+<view class='content_' wx:for="order_list">
+ <view class='content_1'>
+   <view class='content_1_1'>
+    <text class='tx1'>{{carname}}</text>
+    <text class='tx2'>{{status}}</text>
+   </view>
+   <view class='content_1_2'>
+   {{odernumber}}
+   </view>
+   <view class='content_1_3'>
+     借车时间：{{borrow_time}} 还车时间：{{back_time}}
+   </view>
+   <view class='content_1_4'>
+     车型：{{cartype}}
+   </view>
+ </view>
+ <view class='content_2'>
+  <view class='content_2_1'>订单总价：¥{{price}}</view>
+  <view class='content_2_2'>
+  <button  class='con_btn' hover-class='btn_hover1' hover-start-time='40' hover-stay-time='100'>立即支付</button>
+    <button class='con_btn btn_default'  hover-class='btn_hover2' hover-start-time='40' hover-stay-time='100'>取消订单</button>
+  </view>
+ </view>
+ </view>
+ 
+</view>
