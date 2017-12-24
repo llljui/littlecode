@@ -5,18 +5,54 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var qqmapsdk;
 Page({
   data: {
-    motto: 'Hello World',
+    bg_img:null,
+    left_day:null,
+    left_km:null,
+    message_hid:"false",
+    array:wx.getStorageSync('carList'),
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  foreach_carlist:function(){
+    var self=this;
+    console.log(wx.getStorageSync('carList'));
+    var car_list = wx.getStorageSync('car_list').data;
+    var temparry=[];
+    car_list.forEach(function(item,index){
+     // console.log(item.item_name);
+        temparry.push(item.item_name);
+        if (index == (car_list.length-1)){
+          console.log(car_list.length - 1);
+          self.setData({
+            array: temparry
+          });
+          console.log(self.data.array);
+        }
+    })
+    //console.log(car_list);
+  },
+  bindChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)//根据index找到item_id
+    var itemId = wx.getStorageSync('car_list').data;
+    console.log(itemId[e.detail.value].item_id);
+    wx.setStorageSync('cur_car_id',itemId[e.detail.value].item_id);
+    this.setData({
+      index: e.detail.value
+    });
+    wx.getStorageSync('cur_car', e.detail.value)//当前选择车辆
+     wx.navigateTo({
+      url: '../calendar/calendar'
+    })
+  },//
+  toast_hid:function(){
+    this.setData({
+      message_hid: true
     })
   },
   onLoad: function () {
+    var self=this;
   //  console.log(wx.getSystemInfoSync())
     this.setData({
       bgheight: wx.getSystemInfoSync().windowHeight,
@@ -32,10 +68,35 @@ Page({
         var longitude = res.longitude
         var speed = res.speed
         var accuracy = res.accuracy
-        
+        wx.request({
+          url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+          data: {
+            api_name: 'car.index.getIndexInfo',
+            appid: 'cariosappid@u8ms@nsN2G8M2',
+            token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+            PHPSESSID: wx.getStorageSync('phpsessid'),
+            session: wx.getStorageSync('session'),
+            encryptedData: wx.getStorageSync('encryptedData'),
+            iv:wx.getStorageSync('iv')////////////////////////////////这里是首页加载项
+          },
+          header: {
+            "Content-Type": "application/json"
+          },
+          success: function (res) {
+            //console.log(res.data);
+            self.setData({
+              left_day:res.data.data.left_day,
+              left_km: res.data.data.left_km,
+              bg_img: wx.getStorageSync('domain')+res.data.data.b_pic_path
+            })
+          }
+        })
       }
     })//获取地理位置
-      
+      //
+    
+   
+      //
     //解决回弹效果
     //此处开发-----------------------------------------
     if (app.globalData.userInfo) {
@@ -70,6 +131,7 @@ Page({
     var self = this;
     var lat;
     var lng;
+    
     wx.getLocation({
       success: function (res) {
       //  console.log(res);
@@ -114,11 +176,5 @@ Page({
      url: '../calendar/calendar'
    })
   },//点击日历事件
-  chosecar: function () {
-    console.log(222);
-    wx.navigateTo({
-      url: '../carlist/carlist'
-    })
-  }//选择车辆
 })
  

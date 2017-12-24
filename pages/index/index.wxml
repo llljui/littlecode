@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-<image src="http://ouao6zxy5.bkt.clouddn.com/wl2MY"  style="height:{{bgheight}}px;width:{{bgwidth}}px" ></image>
+<image src="{{bg_img}}"  style="height:{{bgheight}}px;width:{{bgwidth}}px" ></image>
 <view class='bigheader_ fd'>XX租车</view>
 <view class='header_ fd'>让您的汽车租赁更方便</view>
 <view class="body_1">
@@ -10,16 +10,29 @@
    </view>
    <view class='calendar'>
      <view class='time_'>
-        <span>预约时间</span>
-        <span><image src="../../img/rl.png" class='rl' bindtap="getTime"></image></span>
+        <span>可预约天数</span>
+        <span class="blue">{{left_day}}</span>
+       <!--<span><image src="../../img/rl.png" class='rl' bindtap="getTime"></image></span>-->
      </view>
      <view class='time_ border_left'>
-        <span>单数</span>
-        <span class="blue">2</span>
+        <span>剩余公里数</span>
+        <span class="blue">{{left_km}}</span>
      </view>
    </view>
-   <view>
-     <button  class='button' size='default' bindtap="chosecar">预约车辆</button>
+   <view> 
+       <view class="section button select_btn">
+          <picker bindchange="bindChange" value="{{index}}" range="{{array}}" catchtap='foreach_carlist'>
+              <view class="picker">
+                  当前车辆 <text class='carName'>浙A6666{{array[index]}}</text> <i class='fa fa-angle-down flrt'></i>
+              </view>
+          </picker>
+       </view>
+ 
    </view>
+</view>
+<view class="body-view">
+    <toast hidden="{{message_hid}}" bindchange="toast_hid">
+        默认
+    </toast>
 </view>
 </view>

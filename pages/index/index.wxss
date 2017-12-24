@@ -14,4 +14,7 @@
 .border_left{border-left: 1px solid #ddd;}
 .blue{color:#1296db}
 .rl{width:18vw;height:9vh;vertical-align:middle; }
+.select_btn{border-radius: 8rpx;height:80rpx;text-align: center;line-height: 80rpx; }
+.flrt{float: right;line-height: 80rpx;margin-right: 20rpx;}
+.carName{font-family: '宋体';font-size: 30rpx;}
 /** 添加自定义button点击态样式类**/

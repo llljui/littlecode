@@ -35,7 +35,6 @@ const conf = {
      
     this.calculateEmptyGrids2(cur_year2, nex_month);//2
     this.calculateDays2(cur_year2, nex_month);//2
-
     this.setData({
       cur_year,
       cur_year2,
@@ -43,6 +42,7 @@ const conf = {
       nex_month,
       weeks_ch
     });
+
   },
   getThisMonthDays(year, month) {
     return new Date(year, month, 0).getDate();
@@ -106,14 +106,31 @@ const conf = {
     let days2 = [];
 
     const thisMonthDays = this.getThisMonthDays(year, month);
-
+    
+    wx.request({
+      url: wx.getStorageSync('weburl'), //接口地址
+      data: {
+        api_name: 'car.car.getUseDayByCar',
+        appid: 'cariosappid@u8ms@nsN2G8M2',
+        token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+        PHPSESSID: wx.getStorageSync('phpsessid'),
+        item_id:wx.getStorageSync('cur_car_id')
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        
+      }
+    })
     for (let i = 1; i <= thisMonthDays; i++) {
       days2.push({
         day2: i,
         choosed2: false
       });
     }//这里来请求数据哪些时间可预约
-
+    
     this.setData({
       days2
     });
