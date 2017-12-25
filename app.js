@@ -108,8 +108,8 @@ App({
                             var carlist = res.data.data;
                             var list=[];
                             carlist.forEach(function(item,index){
-                              list.push(item.item_name);
-                              console.log(item.item_name+','+index)
+                              list.push(item.plate_num);
+                              console.log(item.plate_num+','+index)
                             });
                            // console.log(list);
                             wx.setStorageSync('carList', list);//返回车辆相关

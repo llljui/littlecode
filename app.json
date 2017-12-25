@@ -1,22 +1,19 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/details/details",
     "pages/calendar/calendar",
     "pages/carlist/carlist",
     "pages/order/order",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/ensuredetail/ensure"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "XXXX有限公司",
-    "navigationBarTextStyle":"black",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "XXXX有限公司",
-    "backgroundColor": "#eeeeee",
-    "backgroundTextStyle": "light"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -26,11 +23,11 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "selectedIconPath":"img/home2.png",
-        "iconPath":"img/home1.png"
+        "selectedIconPath": "img/home2.png",
+        "iconPath": "img/home1.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/carlist/carlist",
         "text": "订单",
         "selectedIconPath": "img/order2.png",
         "iconPath": "img/order1.png"

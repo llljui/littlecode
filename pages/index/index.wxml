@@ -21,9 +21,9 @@
    </view>
    <view> 
        <view class="section button select_btn">
-          <picker bindchange="bindChange" value="{{index}}" range="{{array}}" catchtap='foreach_carlist'>
+          <picker bindchange="bindChange" value="{{index}}" bindcolumnchange="changeinfo" range="{{array}}" catchtap='foreach_carlist' mode = 'multiSelector'>
               <view class="picker">
-                  当前车辆 <text class='carName'>浙A6666{{array[index]}}</text> <i class='fa fa-angle-down flrt'></i>
+                 <text class='carName'>{{array[0][0]}}{{array[1][0]}}</text> <i class='fa fa-angle-down flrt'></i>
               </view>
           </picker>
        </view>

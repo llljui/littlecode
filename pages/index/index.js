@@ -9,35 +9,43 @@ Page({
     left_day:null,
     left_km:null,
     message_hid:"false",
-    array:wx.getStorageSync('carList'),
+    array: [['绑定车辆', '其他车辆'], wx.getStorageSync('carList')],
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    multiIndex2: [0, 0],
   },
   //事件处理函数
-  foreach_carlist:function(){
-    var self=this;
+  changeinfo:function(e){
+    console.log(e);  
+  },
+  onShow:function(){
     console.log(wx.getStorageSync('carList'));
+  },
+  foreach_carlist:function(e){
+    var self=this;
+    //console.log(e);
+    //console.log(wx.getStorageSync('car_list').data);
     var car_list = wx.getStorageSync('car_list').data;
-    var temparry=[];
-    car_list.forEach(function(item,index){
+    //var temparry=[];
+//car_list.forEach(function(item,index){
      // console.log(item.item_name);
-        temparry.push(item.item_name);
-        if (index == (car_list.length-1)){
-          console.log(car_list.length - 1);
-          self.setData({
-            array: temparry
-          });
-          console.log(self.data.array);
-        }
-    })
-    //console.log(car_list);
+      //temparry.push(item.plate_num);
+       // if (index == (car_list.length-1)){
+       //   console.log(car_list.length - 1);
+       //   self.setData({
+      //      array: temparry
+      //    });
+      //    console.log(self.data.array);
+  //      }
+    //})
+    console.log(car_list);
   },
   bindChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)//根据index找到item_id
     var itemId = wx.getStorageSync('car_list').data;
-    console.log(itemId[e.detail.value].item_id);
-    wx.setStorageSync('cur_car_id',itemId[e.detail.value].item_id);
+    console.log(itemId[e.detail.value].plate_num);
+    wx.setStorageSync('cur_car_id', itemId[e.detail.value].plate_num);
     this.setData({
       index: e.detail.value
     });
@@ -53,6 +61,7 @@ Page({
   },
   onLoad: function () {
     var self=this;
+    console.log(wx.getStorageSync('carList'));
   //  console.log(wx.getSystemInfoSync())
     this.setData({
       bgheight: wx.getSystemInfoSync().windowHeight,
@@ -87,7 +96,7 @@ Page({
             self.setData({
               left_day:res.data.data.left_day,
               left_km: res.data.data.left_km,
-              bg_img: wx.getStorageSync('domain')+res.data.data.b_pic_path
+              bg_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514195746053&di=71f19cf88466a05ba0a4b0f2a22128bc&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201502%2F10%2F20150210133921_WB3QV.jpeg'//wx.getStorageSync('domain')+res.data.data.b_pic_path
             })
           }
         })

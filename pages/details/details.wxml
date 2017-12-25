@@ -1,4 +1,20 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  
+<view class="container">
+  <view class='header'>
+   <text>XXX汽车租赁有限公司</text>
+   <text> 2017-12-1 起租| 2017-12-9 归还</text>
+   <text>奔驰123|共8天</text>
+  </view>
+  <view class='content'>
+   <view><text>租车数量</text><text> 1辆</text></view>
+   <view><text>约车人</text><text> 王三</text></view>
+   <view><text>联系方式</text><text> 18267832592</text></view>
+   <view><text>身份证号</text><text> 330327199001234294</text></view>
+   <view><text>保留时间</text><text> 2017-01-08 08：30</text></view>
+  </view>
+  <view class='footer'>
+     <view>¥1964.<text style="font-size:20rpx;">00</text></view>
+     <view>提交订单</view>
+  </view>
+
 </view>

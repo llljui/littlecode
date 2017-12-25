@@ -15,8 +15,8 @@
         <view class="days box box-lr box-wrap">
             <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}" >
             </view>
-            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" catchtap="tapDayItem" data-ptime="1">
-                <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day}}</view>
+            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" catchtap="tapDayItem" data-ptime="1" data-color="{{item.active}}">
+                <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center" style="color:{{item.active}}" >{{item.day}}</view>
             </view>
         </view>
 
@@ -38,12 +38,10 @@
         <view class="days box box-lr box-wrap">
             <view wx:if="{{hasEmptyGrid2}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids2}}" wx:key="{{index}}" data-idxx="{{index}}" >
             </view>
-            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days2}}" wx:key="{{index}}" data-idxx="{{index}}" catchtap="tapDayItem" data-ptime="2">
-                <view class="day {{item.choosed2 ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day2}}</view>
+            <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{days2}}" wx:key="{{index}}" data-idxx="{{index}}" catchtap="tapDayItem" data-ptime="2" data-color="{{item.active}}">
+                <view class="day {{item.choosed2 ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center" style="color:{{item.active}}">{{item.day2}}</view>
             </view>
         </view>
-
-        
     </view>
 </view>
 

@@ -16,19 +16,23 @@ const conf = {
     ifshow_:"none",
     page_time:null,
     borrow1:[],
-    borrow2: []
+    borrow2: [],
+    cannot_time:null,
+    cannotTime1:[],
+    cannotTime2: []
   },
   onLoad() {
+    var self=this;
     const date = new Date();
     const cur_year = date.getFullYear();
     var cur_year2 = date.getFullYear();//看是否是十二月
     const cur_month = date.getMonth() + 1;
     var nex_month = null;//2
+    
     if (cur_month==12){
       cur_year2 = cur_year+1;
       nex_month=1;
     } else { cur_year2 = cur_year; nex_month = cur_month+1}
-
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
     this.calculateEmptyGrids(cur_year, cur_month);
     this.calculateDays(cur_year, cur_month);
@@ -69,20 +73,65 @@ const conf = {
     }
   },//计算网格
   calculateDays(year, month) {
+    var self=this;
+    var temp_not1 = [];
+    
     let days = [];
-
     const thisMonthDays = this.getThisMonthDays(year, month);
+    wx.request({
+      url: wx.getStorageSync('weburl'), //接口地址
+      data: {
+        api_name: 'car.car.getUseDayByCar',
+        appid: 'cariosappid@u8ms@nsN2G8M2',
+        token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+        PHPSESSID: wx.getStorageSync('phpsessid'),
+        item_id: wx.getStorageSync('cur_car_id')
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+       // console.log(res.data.data);
+        var temp_time = []
+        function getTime(nS) {
+          return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+        }
+        res.data.data.forEach(function (item, index) {
+          temp_time.push(getTime(item).split(" ")[0]);
+          let a = getTime(item).split(" ")[0].toString().split('/');
+          if (a[1] == month) {
+            temp_not1.push(a[2]);
+          }
 
-    for (let i = 1; i <= thisMonthDays; i++) {
-      days.push({
-        day: i,
-        choosed: false
-      });
-    }
-
-    this.setData({
-      days
-    });
+        });
+        function sortNumber(a, b) {
+          return a - b
+        }
+        self.setData({
+          cannot_time: temp_time,
+          cannotTime1: temp_not1.sort(sortNumber)
+        });
+        for (let i = 1; i <= thisMonthDays; i++) {
+          days.push({
+            day: i,
+            choosed: false
+          });
+        }
+        //console.log(temp_not1);
+        temp_not1.forEach(function (item, index) {
+          days.splice(item - 1, 1, {
+            day: item ,
+            choosed: true,
+            active:'red'
+          });
+          console.log(item)
+        });
+        self.setData({
+          days
+        });
+      }
+    })//获取车辆可预约时间
+    
   },//计算天数
   calculateEmptyGrids2(year, month) {
     const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
@@ -104,9 +153,10 @@ const conf = {
   },//计算网格
   calculateDays2(year, month) {
     let days2 = [];
-
+  //  var temp_not1 = [];
+    var temp_not2 = [];
+    var self=this;
     const thisMonthDays = this.getThisMonthDays(year, month);
-    
     wx.request({
       url: wx.getStorageSync('weburl'), //接口地址
       data: {
@@ -114,26 +164,53 @@ const conf = {
         appid: 'cariosappid@u8ms@nsN2G8M2',
         token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
         PHPSESSID: wx.getStorageSync('phpsessid'),
-        item_id:wx.getStorageSync('cur_car_id')
+        item_id: wx.getStorageSync('cur_car_id')
       },
       header: {
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data.data);
-        
+       // console.log(res.data.data);
+        var temp_time = []
+        function getTime(nS) {
+          return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+        }
+        res.data.data.forEach(function (item, index) {
+          temp_time.push(getTime(item).split(" ")[0]);
+          let a = getTime(item).split(" ")[0].toString().split('/');
+          if (a[1] == month) {
+            temp_not2.push(a[2]);
+          } 
+          //temp_not2=['21','1','11']
+        });
+        function sortNumber(a, b) {
+          return a - b
+        }
+        self.setData({
+          cannot_time: temp_time,
+          cannotTime2: temp_not2.sort(sortNumber)
+        });
+        for (let i = 1; i <= thisMonthDays; i++) {
+          days2.push({
+            day2: i,
+            choosed2: false
+          });
+        }
+      //  console.log(temp_not1);
+        temp_not2.forEach(function (item, index) {
+          days2.splice(item - 1, 1, {
+            day2: item,
+            choosed2: true,
+            active: 'red'
+          });
+         // console.log(item)
+        });
+        self.setData({
+          days2
+        });
       }
-    })
-    for (let i = 1; i <= thisMonthDays; i++) {
-      days2.push({
-        day2: i,
-        choosed2: false
-      });
-    }//这里来请求数据哪些时间可预约
-    
-    this.setData({
-      days2
-    });
+    })//获取车辆可预约时间
+
   },//计算天数2
   handleCalendar(e) {
     const hand = e.currentTarget.dataset.hand;
@@ -216,6 +293,10 @@ const conf = {
     //console.log(e)
     const idx = e.currentTarget.dataset.idx;
     const days = this.data.days;
+    const color = e.currentTarget.dataset.color;
+    if (color=='red'){
+       console.log('hhda')
+    }else{
 
     const idxx = e.currentTarget.dataset.idxx;
     const days2 = this.data.days2;
@@ -234,9 +315,9 @@ const conf = {
         try {
           var value = wx.getStorageSync('cur_month');
           if (value) {
-            borrow1.push(this.data.cur_year + '年' + value + '月' + (idx + 1) + '日');
-            console.log(this.data.cur_year + '年' + value + '月' + (idx + 1) + '日')//
-            console.log(this.data.borrow1);
+            borrow1.push(this.data.cur_year + '-' + value + '-' + (idx + 1) + ' ' + '00:00:00');
+           // console.log(this.data.cur_year + '-' + value + '-' + (idx + 1) + ' ' + '00:00:00')//
+          //  console.log(this.data.borrow1);
             this.setData({
               borrow1
             })
@@ -253,7 +334,7 @@ const conf = {
         try {
           var value = wx.getStorageSync('cur_month');
           if (value) {
-            borrow1.splice(this.return_index(borrow1, this.data.cur_year + '年' + value + '月' + (idx + 1) + '日'),1);
+            borrow1.splice(this.return_index(borrow1, this.data.cur_year + '-' + value + '-' + (idx + 1) + ' ' + '00:00:00'),1);
             console.log(this.data.borrow1)//         
             this.setData({
               borrow1
@@ -282,8 +363,8 @@ const conf = {
           var value = wx.getStorageSync('nex_month')
           if (value) {
            // console.log(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日')// 获取当前时间
-            borrow2.push(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日');
-            console.log(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日')//
+            borrow2.push(this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' ' + '00:00:00');
+            console.log(this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' ' + '00:00:00')//
             console.log(this.data.borrow2);
             this.setData({
               borrow2
@@ -300,7 +381,7 @@ const conf = {
         try {
           var value = wx.getStorageSync('nex_month');
           if (value) {
-            borrow2.splice(this.return_index(borrow2, this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日'), 1);
+            borrow2.splice(this.return_index(borrow2, this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' '+'00:00:00'), 1);
             console.log(this.data.borrow2)//         
             this.setData({
               borrow2
@@ -320,7 +401,27 @@ const conf = {
     } catch (e) {
       console.log(e);
     }
-    console.log(wx.getStorageSync('order_time'));
+    if (wx.getSystemInfoSync().system.indexOf('Android')!=-1){
+    // console.log('安卓')
+    } else { 
+     // console.log('ios');
+     // console.log(wx.getStorageSync('order_time'));
+      var temp;
+      var temparr=[];
+      wx.getStorageSync('order_time').forEach(function(item,index){
+        temp=item.replace(/-/g,'/');
+       // temp = item.split(' ');
+        //temp.splice(1,0,'T');
+       // temp.push('.000Z');
+        //temp=temp.join('');
+        temparr.push(temp);
+        //console.log(temp);//.splice(3,0,'.000Z').join()
+      });
+      wx.setStorageSync('order_time',temparr);
+    }
+
+    //console.log(wx.getStorageSync('order_time'));
+    }
    // -------------------------------------------------------------------------------------------------
   },//点击时间选择
   chooseYearAndMonth(e) {
@@ -387,7 +488,7 @@ const conf = {
   onShareAppMessage() {
     return {
       title: '小程序日历',
-      desc: '还是新鲜的日历哟',
+      desc: '新鲜日历',
       path: 'pages/index/index'
     };
   },
@@ -429,14 +530,20 @@ const conf = {
   },
   navto1:function(){
     console.log(2);
+
     wx.switchTab({
        url: '../index/index'
      })
   },
   navto2:function(){
-    wx.navigateTo({
-      url: '../carlist/carlist'
-    })
+    if(wx.getStorageSync('order_time')){
+   //   console.log(wx.getStorageSync('order_time'));
+      wx.navigateTo({
+        url: '../ensuredetail/ensure'
+      })
+    }else{
+     console.log('您还未选时间');
+    }
   }
 };
 

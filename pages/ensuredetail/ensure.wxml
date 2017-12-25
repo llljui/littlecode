@@ -1,0 +1,16 @@
+<view class="contanin">
+<view class='caricon'>
+  <image  src="item" wx:for="{{iconimg}}" wx:key="{{index}}"></image>
+</view>
+<view class='car_type_list'>
+   <view><text class='type'>车型:</text><text class='type2'>{{item_name}}</text></view>
+   <view><text class='type'>车牌号:</text><text class='type2'>{{plate_num}}</text></view>
+   <view class='type_list'>
+    <view  wx:for="{{userinfo}}" wx:key="index">
+      <view class='three_'><text>时间:</text><text>{{item.start_time}}-{{item.end_time}}</text><text>共{{item.day_num}}天</text></view>
+      <view><text class='two_'>价格:</text><text class='price'>¥{{item.price}}</text></view>
+    </view>
+   </view>
+   <view class='setorder'><text>总价:¥168</text><text class='order_btn' catchtap='setorder'>生成订单</text></view>
+</view>
+</view>

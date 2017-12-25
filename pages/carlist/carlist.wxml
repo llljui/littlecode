@@ -1,31 +1,5 @@
-<!--pages/carlist/carlist.wxml-->
-<view class="header_">
-  <view class='header_span'>
-    <text class='fa fa-angle-down' style='margin-right:2vw;'></text>
-    <text>时间</text>
-  </view>
-  <view class='header_span'>
-    <text class='fa fa-angle-down' style='margin-right:2vw;'></text>
-    <text>位置</text>
-  </view>
-  <view class='header_span'>
-    <text class='fa fa-angle-down' style='margin-right:2vw;'></text>
-    <text>价格</text>
-  </view>
-</view>
-<view class='list_'>
-  <view class='border_bottom' wx:for="{{carlist}}" wx:key="{{index}}">
-      <view class='v1'>
-        <image class="cartype" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4187903139,2134569676&fm=11&gp=0.jpg" width="20%"></image>
-      </view>
-      <view class='v2'>
-        <text>品牌：{{item.brands}}</text>
-        <text>型号：{{item.model}}</text>
-        <text>车牌：{{item.carlicense}}</text>
-      </view>
-    <view class='v3'>
-     <view class='v3_1'><button size="mini" bindtap="cardetails" class="v3_btn">选择</button></view>
-     <view class='v3_2'>价格：{{item.price}}</view>
-    </view>
-  </view>
-</view>
+<picker mode="multiSelector" bindchange="bindMultiPickerChange2" bindcolumnchange="bindMultiPickerColumnChange2" value="{{multiIndex}}" range="{{objectMultiArray}}" range-key="{{'name'}}" catchtap='getdata'>
+   <view class="picker">
+      当前选择：{{objectMultiArray[0][multiIndex2[0]].name}}，{{objectMultiArray[1][multiIndex2[1]].plate_num}}
+   </view>
+</picker>
