@@ -9,59 +9,208 @@ Page({
     left_day:null,
     left_km:null,
     message_hid:"false",
-    array: [['绑定车辆', '其他车辆'], wx.getStorageSync('carList')],
+    multiArray: [[{ 'id': 0, 'type': '绑定车辆'},{'id':1,'type':'绑定车辆'}],[]],
+    typelist:[],
+    carlist:[],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    multiIndex2: [0, 0],
+    multiIndex1:0,
+    multiIndex2:0,
+    carids1:[],
+    carids2: [],
+    hastwo:'0'
   },
   //事件处理函数
   changeinfo:function(e){
-    console.log(e);  
+    //console.log(e);  
+    var self=this;
+    console.log(e)
+ 
   },
   onShow:function(){
     console.log(wx.getStorageSync('carList'));
   },
   foreach_carlist:function(e){
     var self=this;
-    //console.log(e);
-    //console.log(wx.getStorageSync('car_list').data);
-    var car_list = wx.getStorageSync('car_list').data;
-    //var temparry=[];
-//car_list.forEach(function(item,index){
-     // console.log(item.item_name);
-      //temparry.push(item.plate_num);
-       // if (index == (car_list.length-1)){
-       //   console.log(car_list.length - 1);
-       //   self.setData({
-      //      array: temparry
-      //    });
-      //    console.log(self.data.array);
-  //      }
-    //})
-    console.log(car_list);
+    console.log(e);
+    self.setData({
+      plate1: null,
+      array: [['绑定车辆', '其他车辆'], [null]],
+      carids1: null,
+      carids2: null,
+      plate2: null
+    });
+    console.log(wx.getStorageSync('bindcar'));
+    var plate=[];
+    var carid=[];
+    var dd = wx.getStorageSync('bindcar');
+    for(let i=0;i<10;i++){
+      dd.push(wx.getStorageSync('bindcar')[0]);
+    }
+    dd.forEach(function(item,index){
+      plate.push(item.plate_num);
+      carid.push(item.item_id);
+    });
+    console.log(dd);
+    var plate1=plate.shift();
+
+    self.setData({
+      plate1: plate1,
+      array: [['绑定车辆', '其他车辆'], [plate1]],
+      carids1: carid.shift(),
+      carids2: carid,
+      plate2: plate
+    });
+      console.log(self.data.plate2);
   },
   bindChange: function (e) {
+    var self=this;
+    console.log(e)
     console.log('picker发送选择改变，携带值为', e.detail.value)//根据index找到item_id
-    var itemId = wx.getStorageSync('car_list').data;
-    console.log(itemId[e.detail.value].plate_num);
-    wx.setStorageSync('cur_car_id', itemId[e.detail.value].plate_num);
-    this.setData({
-      index: e.detail.value
-    });
-    wx.getStorageSync('cur_car', e.detail.value)//当前选择车辆
-     wx.navigateTo({
-      url: '../calendar/calendar'
-    })
+    if (e.detail.value[0]==0){
+      wx.setStorageSync('cur_car_id',self.data.carids1);//取绑定的车辆
+    }else{
+     // wx.setStorageSync('cur_car_id', carids2);//取其他的车辆
+    }
+    //var itemId = wx.getStorageSync('car_list').data;
+   // console.log(itemId[e.detail.value].plate_num);
+   // wx.setStorageSync('cur_car_id', itemId[e.detail.value].plate_num);
+ 
+   // wx.getStorageSync('cur_car', e.detail.value)//当前选择车辆
+   //  wx.navigateTo({
+   //   url: '../calendar/calendar'
+   // })
   },//
   toast_hid:function(){
     this.setData({
       message_hid: true
     })
   },
+  searchClassInfo(xiaoqu_id) {
+    var that = this;
+    if (xiaoqu_id) {
+      this.setData({
+        teach_area_id: xiaoqu_id
+      })
+      var url = wx.getStorageSync('weburl');
+      wx.request({
+        url: url, //接口地址
+        data: {
+          api_name: 'car.car.getCarList',
+          appid: wx.getStorageSync('appid'),
+          token: wx.getStorageSync('token'),
+          PHPSESSID: wx.getStorageSync('phpsessid')
+        },
+        header: {
+          "Content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data)
+          var classList = res.data.data;
+          var classArr = classList.map(function(item,index){
+            return item.plate_num;
+          })
+          classArr.unshift('全部车辆');　　　　　　// 接口中没有提供全部班级字段，添加之
+          var xiaoquArr = that.data.xiaoquArr;
+          that.setData({
+            multiArray: [xiaoquArr, classArr],
+            classArr,
+            classList
+          })
+
+        }
+      })
+    
+
+    }
+  },
+  bindMultiPickerColumnChange: function (e) {
+    //e.detail.column 改变的数组下标列, e.detail.value 改变对应列的值
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    var teach_area_id_session = this.data.teach_area_id;　　　　// 保持之前的校区id 与新选择的id 做对比，如果改变则重新请求数据
+    switch (e.detail.column) {
+      case 0:
+        var xiaoquList = this.data.xiaoquList;
+        var teach_area_id = xiaoquList[e.detail.value]['teach_area_id'];
+        if (teach_area_id_session != teach_area_id) {　　　　// 与之前保持的校区id做对比，如果不一致则重新请求并赋新值
+          this.searchClassInfo(teach_area_id);
+        }
+        data.multiIndex[1] = 0;
+        break;
+    }
+    this.setData(data);
+  },
+  bindMultiPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    var class_key = 0;
+    var classList = this.data.classList;
+    var select_key = e.detail.value[1];
+    var real_key = select_key - 1;
+    if (real_key < class_key) {
+      this.setData({
+        class_id: 0
+      })
+    } else {
+      this.setData({
+        class_id: classList[real_key]['teach_instance_id']　　　　　　// class_id 代表着选择的班级对应的 班级id
+      })
+    }
+    this.setData({
+      multiIndex: e.detail.value
+    })
+  },
   onLoad: function () {
     var self=this;
-    console.log(wx.getStorageSync('carList'));
+    //////////////////////////////////////////////////////////////////////////
+    wx.request({
+      url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+      data: {
+        api_name:'car.car.getCarList',
+        appid: wx.getStorageSync('appid'),
+        token: wx.getStorageSync('token'),
+        PHPSESSID: wx.getStorageSync('phpsessid')
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data);
+        var xiaoquList = [{
+          'id': 0, "teach_area_id": "xxx2", "teach_area_name": "绑定车辆"}, { 'id': 1, "teach_area_id": "xxx3", "teach_area_name": "其他车辆" }];
+        var xiaoquArr = xiaoquList.map(function(item,index){　　　　// 此方法将校区名称区分到一个新数组中
+          return item.teach_area_name;
+        });
+        self.setData({
+          multiArray: [xiaoquArr, []],
+          xiaoquList,
+          xiaoquArr: ["绑定车辆", "其他车辆"]
+        })
+        var default_xiaoqu_id = xiaoquList[0]['teach_area_id'];　　　　//获取默认的校区对应的 teach_area_id
+        if (default_xiaoqu_id) {
+          self.searchClassInfo(default_xiaoqu_id)　　　　　　// 如果存在调用获取对应的班级数据
+        }
+      }
+       // 
+        //wx.setStorageSync('bindcar',res.data.data);
+       // var plate=[];
+       // res.data.data.forEach(function (item, index) {
+      //    plate.push(item.plate_num);
+    //    })
+      //  self.setData({
+      //    multiArray: [, []],
+      //    typelist: [],
+      //    carlist: []
+     //   });
+      //}
+    })
+    //////////////////////////////////////////////////////////////////////////
+
   //  console.log(wx.getSystemInfoSync())
     this.setData({
       bgheight: wx.getSystemInfoSync().windowHeight,

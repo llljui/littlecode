@@ -10,6 +10,8 @@ App({
     wx.setStorageSync('session', '1')
     wx.setStorageSync('weburl', 'https://www.vipyunfu.com/api/api')
     wx.setStorageSync('domain', 'https://www.vipyunfu.com')
+    wx.setStorageSync('appid','cariosappid@u8ms@nsN2G8M2' )
+    wx.setStorageSync('token','CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u')
     // 登录
     wx.login({
       success: res => {
@@ -69,7 +71,7 @@ App({
          // console.log(value);
           if (value) {
             wx.request({
-              url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+              url: wx.getStorageSync('weburl'), //接口地址
               data: {
                   session:value,
                   iv:res.iv,

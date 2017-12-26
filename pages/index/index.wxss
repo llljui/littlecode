@@ -18,5 +18,5 @@
 .select_btn picker{height: 8vh}
 .flrt{float: right;line-height: 80rpx;margin-right: 20rpx;}
 .carName{font-family: '宋体';font-size: 30rpx;}
-.picker{width: 100%;display: block;height: 8vh;}
+.picker{width: 100%;display: inline;height: 8vh;}
 /** 添加自定义button点击态样式类**/
