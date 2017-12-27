@@ -32,3 +32,12 @@ background-color: white;
 .pay_1_3{text-align: center;}
 .pay_1_4,.pay_1_5{display: block;font-family:'宋体'!important;font-size:30rpx!important;text-indent: 1em;line-height: 5vh;color: #878D99;}
 .pay_1_5{padding-bottom:1vh; }
+.paylist_{width: 92vw;margin: 0 auto;border-bottom:1px solid #D8DCE5; }
+.header_{font-family: '宋体';font-size: 32rpx;padding: 2vh 0 1vh 0}
+.methods{width: 92vw;height: 6vh;margin: 0 auto;}
+.methods>image{width: 33vw;height: 5.5vh;display: inline-block;}
+.pay_{font-family: '宋体';font-size: 30rpx;border-bottom: 1px solid #D8DCE5;width: 92vw;margin: 1vh auto;padding: 2vh 0 1vh 0}
+.radio{width: 25rpx;height: 25rpx;border-radius: 15rpx;border: 2px solid #ccc;display: inline-block;margin-top: 24rpx;float: right;}
+.bg{background:#509BE8;}
+.time{display: inline-block;width:100%;height: 5vh;line-height: 5vh;font-family: '宋体';clear: both;float: left;font-size: 30rpx;color:#909399;text-indent: 1em}
+.price{color: red;}

@@ -10,7 +10,6 @@ Page({
     left_day:null,
     left_km:null,
     message_hid:"false",
-    multiArray: [[{ 'id': 0, 'type': '绑定车辆'},{'id':1,'type':'绑定车辆'}],[]],
     typelist:[],
     carlist:[],
     userInfo: {},
@@ -137,6 +136,10 @@ Page({
       multiIndex: e.detail.value,
       chosecar:''
     })
+    wx.setStorageSync('cur_car_id', '87' )
+    wx.navigateTo({
+      url: '../calendar/calendar',
+    })
   },
   bindit:function(){
 
@@ -145,7 +148,7 @@ Page({
     var self=this;
     //////////////////////////////////////////////////////////////////////////
     wx.request({
-      url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+      url: wx.getStorageSync('weburl'), //的接口地址
       data: {
         api_name:'car.car.getCarList',
         appid: wx.getStorageSync('appid'),
@@ -158,7 +161,7 @@ Page({
       success: function (res) {
         console.log(res.data);
         var xiaoquList = [{ "teach_area_id": "0", "teach_area_name": "绑定车辆"}, { "teach_area_id": "1", "teach_area_name": "其他车辆" }];
-        var xiaoquArr = xiaoquList.map(function(item,index){　　　　// 此方法将校区名称区分到一个新数组中
+        var xiaoquArr = xiaoquList.map(function(item,index){　　　　// 此方法将区分到一个新数组中
           return item.teach_area_name;
         });
         self.setData({
@@ -166,7 +169,7 @@ Page({
           xiaoquList,
           xiaoquArr: ["绑定车辆", "其他车辆"]
         })
-        var default_xiaoqu_id = xiaoquList[0]['teach_area_id'];　　　　//获取默认的校区对应的 teach_area_id
+        var default_xiaoqu_id = xiaoquList[0]['teach_area_id'];　　　　//获取默认的对应的 teach_area_id
         if (default_xiaoqu_id) {
           self.searchClassInfo(default_xiaoqu_id)　　　　　　// 如果存在调用获取对应的班级数据
         }

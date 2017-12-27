@@ -85,9 +85,8 @@ App({
                 "Content-Type": "application/json"
               },
               success: function (res) {
-               // console.log(res.data);
+               console.log(res.data);
                 if (res.data.code == 0) {
-                  try {
                     wx.setStorageSync("phpsessid", res.data.data.ssid);
                     try {
                       var weburl = wx.getStorageSync('weburl')
@@ -120,9 +119,6 @@ App({
                       }
                     } catch (e) {
                       // Do something when catch error
-                    }
-                  } catch (e) {
-                    console.log(e);
                   }
                 } else {
                   console.log(res.data.msg);

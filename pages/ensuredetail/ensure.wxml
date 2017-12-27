@@ -1,16 +1,50 @@
-<view class="contanin">
-<view class='caricon'>
-  <image  src="item" wx:for="{{iconimg}}" wx:key="{{index}}"></image>
-</view>
-<view class='car_type_list'>
-   <view><text class='type'>车型:</text><text class='type2'>{{item_name}}</text></view>
-   <view><text class='type'>车牌号:</text><text class='type2'>{{plate_num}}</text></view>
-   <view class='type_list'>
-    <view  wx:for="{{userinfo}}" wx:key="index">
-      <view class='three_'><text>时间:</text><text>{{item.start_time}}-{{item.end_time}}</text><text>共{{item.day_num}}天</text></view>
-      <view><text class='two_'>价格:</text><text class='price'>¥{{item.price}}</text></view>
+<view class='hed_'>请如实填写一下信息</view>
+<form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="section">
+        <view class="section__title">昵称</view>
+        <input name="realname" placeholder="" disabled value='{{orderdetails.nickname}}' />
     </view>
-   </view>
-   <view class='setorder'><text>总价:¥168</text><text class='order_btn' catchtap='setorder'>生成订单</text></view>
-</view>
-</view>
+    <view class="section">
+        <view class="section__title">联系人</view>
+        <input name="realname" placeholder="请输入联系人姓名" value='{{orderdetails.realname}}' />
+    </view>
+    <view class="section">
+        <view class="section__title">手机号</view>
+        <input name="mobile" placeholder="请输入联系人号码" value='{{orderdetails.mobile}}' />
+    </view>
+    <view class="section">
+        <view class="section__title">驾驶证</view>
+        <input name="carid" placeholder="请输入驾驶证号" value='{{orderdetails.driver_license_number}}' />
+    </view>
+    <view class="section">
+        <view class="section__title">身份证</view>
+        <input name="personid" placeholder="请输入身份证号" value='{{orderdetails.id}}' />
+    </view>
+    <view class='bor'></view>
+    <view class="section">
+        <view class="section__title">车辆</view>
+        <input name="carname" disabled value='{{orderdetails.item_name}}' />
+    </view>
+    <view class="section">
+        <view class="section__title">车牌号</view>
+        <input name="carplate" disabled='disabled' value='{{orderdetails.plate_num}}' />
+    </view>
+    <view class='bor'></view>
+    <view class='vh_'>
+     <view wx:for="{{userinfo}}" wx:key="index">
+      <view> 
+        <view class='time'>起始 {{item.start_time}} 至 结束 {{item.end_time}} </view>
+      </view>
+      <view> 
+        <view class='time'>共{{item.day_num}}天  <text class='price'>{{item.price}}元</text></view>
+      </view>
+     </view>
+      
+
+    </view>
+    <view class='bor'></view>
+    <view class="btn-area">
+        <button formType="submit" type="warn" size="mini">提交订单</button>
+    </view>
+</form>
+<view class='allprice'>¥1233元</view>

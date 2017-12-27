@@ -22,7 +22,44 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "调试",
+					"pathName": "pages/ensuredetail/ensure",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "调试s",
+					"pathName": "pages/pay/pay",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "调试ss",
+					"pathName": "pages/details/details",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "调试ss",
+					"pathName": "pages/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "调试ss",
+					"pathName": "pages/ensuredetail/ensure",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "调试ss",
+					"pathName": "pages/pay/pay",
+					"query": ""
+				}
+			]
 		}
 	}
 }

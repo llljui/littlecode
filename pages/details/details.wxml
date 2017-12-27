@@ -1,20 +1,26 @@
 <!--logs.wxml-->
-<view class="container">
-  <view class='header'>
-   <text>XXX汽车租赁有限公司</text>
-   <text> 2017-12-1 起租| 2017-12-9 归还</text>
-   <text>奔驰123|共8天</text>
+<view class="con">
+  <view class='top'>
+    <image src="item" class='img' wx:for="{{img}}" wx:key="index"></image>  
   </view>
+  <view class='bod'></view>
   <view class='content'>
-   <view><text>租车数量</text><text> 1辆</text></view>
-   <view><text>约车人</text><text> 王三</text></view>
-   <view><text>联系方式</text><text> 18267832592</text></view>
-   <view><text>身份证号</text><text> 330327199001234294</text></view>
-   <view><text>保留时间</text><text> 2017-01-08 08：30</text></view>
+     <text class='car_name'>车辆</text><text class='name'>{{item_name}}</text>
+     <text class='car_plate'>牌照</text><text class='plate'>{{plate_num}}</text>
   </view>
-  <view class='footer'>
-     <view>¥1964.<text style="font-size:20rpx;">00</text></view>
-     <view>提交订单</view>
+  <view class='bod'></view>
+  <view class='body'>
+     <view wx:for="{{userinfo}}" wx:key="index">
+      <view> 
+        <view class='time'>起始 {{item.start_time}} 至 结束 {{item.end_time}} </view>
+      </view>
+      <view> 
+        <view class='time'>共{{item.day_num}}天  <text class='price'>{{item.price}}元</text></view>
+      </view>
+     </view>
+     
   </view>
-
+  <view class='bod'></view>
+  <view class='allprice'>¥1800<text class='txt'>.00</text>元</view>
+  <view class='submit'><button type="warn" catchtap='setorder'>提交</button></view>
 </view>

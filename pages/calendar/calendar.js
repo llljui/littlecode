@@ -539,7 +539,7 @@ const conf = {
     if(wx.getStorageSync('order_time')){
    //   console.log(wx.getStorageSync('order_time'));
       wx.navigateTo({
-        url: '../ensuredetail/ensure'
+        url: '../details/details'
       })
     }else{
      console.log('您还未选时间');

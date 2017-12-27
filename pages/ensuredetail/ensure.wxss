@@ -11,7 +11,17 @@
 .type_list{height: 55vh!important;-webkit-overflow-scrolling: touch;overflow-y: scroll;border-bottom: 0!important;}
 .type{line-height: 6vh;font-weight: bold;}
 .type2{font-size: 28rpx;}
-.price{color: red!important;width: 80%;}
+.allprice{color: red;position: absolute;bottom:1vh;left:5vw;width: 20vw;}
 .three_>text:first-child{width: 16%;}
 .three_>text:last-child{width: 20%;}
 .two_{width:16%;}
+.hed_{font-family: '宋体';font-size: 30rpx;text-indent: 0em;border-bottom: 1px solid #ddd;height: 42rpx;width: 92vw;margin:0 auto;}
+.section{margin: 1vh 0;}
+.section>view{font-family: '宋体';font-size: 30rpx;text-indent: 1em;color: #909399;display: inline-block;width: 20vw;height: 50rpx;}
+.section>input{display: inline-block;width: 80vw;font-family: '宋体';font-size: 30rpx;height: 50rpx;overflow: visible;font-weight: lighter;color: #606266;}
+.btn-area{margin-left: 20rpx;}
+.btn-area>button{position: absolute;bottom:1vh;right: 4vw;width: 30vw;height: 70rpx;line-height: 70rpx;font-size: 30rpx;}
+.bor{border-bottom: 1px solid #ddd;width: 92vw;margin: 0 auto;}
+.vh_{width: 100vw;height: 40vh;overflow-y: scroll;-webkit-overflow-scrolling: touch;}
+.time{display: inline-block;width:100%;height: 5vh;line-height: 5vh;font-family: '宋体';clear: both;float: left;font-size: 30rpx;color:#909399;text-indent: 1em}
+.price{color: red;}
