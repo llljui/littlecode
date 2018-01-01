@@ -17,6 +17,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     multiIndex1:0,
     multiIndex2:0,
+    multiIndex:[0],
     carids1:[],
     carids2: [],
     hastwo:'0'
@@ -38,11 +39,11 @@ Page({
   },
   searchClassInfo(xiaoqu_id) {
     var that = this;
-    console.log(xiaoqu_id)
+    //console.log(xiaoqu_id)
     if (xiaoqu_id) {
       this.setData({
         teach_area_id: xiaoqu_id
-      })
+      });
       var url = wx.getStorageSync('weburl');
       wx.request({
         url: url, //接口地址
@@ -67,7 +68,7 @@ Page({
             var classArr = classList.map(function (item, index) {
               return item.plate_num;
             })
-            //classArr.unshift('全部车辆');　　　　　　// 接口中没有提供全部车辆字段，添加之
+            //classArr.unshift('全部车辆');　　　　　　
             var xiaoquArr = that.data.xiaoquArr;
             that.setData({
               multiArray: [xiaoquArr, classArr],
@@ -76,7 +77,7 @@ Page({
             })
           }else{
             var classList = list2;
-             //console.log(list2)
+             console.log(list2)
             //classList=classList.concat(classList);
             var classArr = classList.map(function (item, index) {
               return item.plate_num;
@@ -162,6 +163,7 @@ Page({
         console.log(res.data);
         var xiaoquList = [{ "teach_area_id": "0", "teach_area_name": "绑定车辆"}, { "teach_area_id": "1", "teach_area_name": "其他车辆" }];
         var xiaoquArr = xiaoquList.map(function(item,index){　　　　// 此方法将区分到一个新数组中
+        console.log(item)
           return item.teach_area_name;
         });
         self.setData({

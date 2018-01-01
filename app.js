@@ -47,7 +47,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo;
-              console.log(this.globalData.userInfo);
+             // console.log(this.globalData.userInfo);
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -85,7 +85,7 @@ App({
                 "Content-Type": "application/json"
               },
               success: function (res) {
-               console.log(res.data);
+               //console.log(res.data);
                 if (res.data.code == 0) {
                     wx.setStorageSync("phpsessid", res.data.data.ssid);
                     try {
@@ -110,7 +110,7 @@ App({
                             var list=[];
                             carlist.forEach(function(item,index){
                               list.push(item.plate_num);
-                              console.log(item.plate_num+','+index)
+                             // console.log(item.plate_num+','+index)
                             });
                            // console.log(list);
                             wx.setStorageSync('carList', list);//返回车辆相关
@@ -121,7 +121,7 @@ App({
                       // Do something when catch error
                   }
                 } else {
-                  console.log(res.data.msg);
+                  //console.log(res.data.msg);
                 }
               }
             })

@@ -58,6 +58,12 @@
 					"name": "调试ss",
 					"pathName": "pages/pay/pay",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/order/order",
+					"query": ""
 				}
 			]
 		}

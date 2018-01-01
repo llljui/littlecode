@@ -28,9 +28,9 @@
           </picker>-->
           <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" catchtap='bindit'>
 　　<view class="picker">
-       <text class='carName'> {{chosecar}} {{multiArray[0][multiIndex[0]]}}  {{multiArray[1][multiIndex[1]]}}</text> <i class='fa fa-angle-down flrt'></i>
+       <text class='carName'> {{chosecar}}{{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]}} </text> <i class='fa fa-angle-down flrt'></i>
     </view>
-</picker>
+          </picker>
        </view>
  
    </view>

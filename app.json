@@ -13,7 +13,8 @@
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "XXXX有限公司",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#eeeeee"
+    "backgroundColor": "#eeeeee",
+    "enablePullDownRefresh":true
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -27,7 +28,7 @@
         "iconPath": "img/home1.png"
       },
       {
-        "pagePath": "pages/carlist/carlist",
+        "pagePath": "pages/order/order",
         "text": "订单",
         "selectedIconPath": "img/order2.png",
         "iconPath": "img/order1.png"
