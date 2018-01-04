@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {},
-  "navigationBarTitleText": "订单",
+  "navigationBarTitleText": "订单列表",
   "enablePullDownRefresh":true
 }

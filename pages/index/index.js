@@ -5,7 +5,7 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var qqmapsdk;
 Page({
   data: {
-    chosecar:'选择车辆',
+    chosecar:'',
     bg_img:null,
     left_day:null,
     left_km:null,
