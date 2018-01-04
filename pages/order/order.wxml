@@ -1,12 +1,21 @@
 <view class='header_'>
-  <view class='span_33' catchtap='opentap' data-icon="1">全部<i class="fa {{icon1}} icons" ></i></view>
-  <view class='span_33' catchtap='opentap' data-icon="2">代付款<i class="fa {{icon2}} icons" ></i></view>
-  <view class='span_33' catchtap='opentap' data-icon="3">用车中<i class="fa {{icon3}} icons"></i></view>
+  <view class='span_33' catchtap='opentap' data-icon="1" style='color:{{cur_color1}}'>全部</view>
+  <view class='span_33' catchtap='opentap' data-icon="2" style='color:{{cur_color2}}'>用车中</view>
+  <view class='span_33' catchtap='opentap' data-icon="3" style='color:{{cur_color3}}'>已还车</view>
 </view>
 <view class='contain'>
 <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true" scroll-with-animation="true" style="height:{{scrollHeight}};">
   <view class='scroll_view' wx:for="{{order_list}}" wx:key="index">
-    {{item.list}}
+    <view class='orderid'>订单号：{{item.order_sn}}</view>
+    <view>创建时间：{{item.addtime}}</view>
+    <view class='status' style="color:red">{{item.order_status_name}}</view>
+    <view class='bord'></view>
+    <view class='auth' style='color:#303133'>{{item.realname}}</view><view  class='auth' style='color:#303133'>{{item.mobile}}</view>
+    <view style=''>驾驶证： {{item.driver_license_number}}</view>
+    <view style=''>借：{{item.start_time}} 还：{{item.end_time}}</view>
+    <view style=''>订单总价：<text style='font-family:微软雅黑;'>¥</text>{{item.total_amount}}</view>
+    <view style='color:red;font-weight:bold'>实付款：<text style='font-family:微软雅黑;'>¥</text>{{item.pay_amount}}</view>
+    <view class='line'></view>
   </view>
 </scroll-view>
 </view>

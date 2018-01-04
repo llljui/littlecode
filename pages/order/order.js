@@ -1,5 +1,7 @@
 Page({
   data: {
+    loading:true,
+    cur_color1:'red',
     icon1:'fa-sort-down',
     icon2: 'fa-sort-down',
     icon3: 'fa-sort-down',
@@ -15,9 +17,10 @@ Page({
     back_time:'2017-08-09',
     cartype:'奔驰-2016',
     price:'1000',
-    order_list: [{ 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }, { 'list': '1' }]
+    order_list: []
   },
   onLoad: function () {
+    var self=this;
     wx.request({
       url: wx.getStorageSync('weburl'), //接口地址
       data: {
@@ -30,7 +33,25 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data)
+        console.log(res.data);
+        function time(ti){
+          var da = Number(ti);
+          da = new Date(da);
+          var year = da.getFullYear() + '';
+          var month = da.getMonth() + 1 + '';
+          var date = da.getDate() + '';
+         // console.log([year, month, date].join('/'));
+          return [year, month, date].join('/');
+        }
+        var s_temp=null;
+        res.data.data.order_list.forEach(function(item,index){
+          item.addtime = time(item.start_time);
+          item.start_time = time(item.start_time);
+          item.end_time = time(item.end_time);
+        })
+        self.setData({
+          order_list: res.data.data.order_list
+        })
       }
     })
   },
@@ -49,36 +70,71 @@ Page({
     })
   },
   bindDownLoad:function(){
+    var self=this;
     wx.showNavigationBarLoading();
-    wx.request({
-      url: wx.getStorageSync('weburl'), //接口地址
-      data: {
-        api_name: 'car.order.getOrderList',
-        appid: 'cariosappid@u8ms@nsN2G8M2',
-        token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
-        firstRow: '52'
-      },
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
-    setTimeout(function(){
-      wx.hideNavigationBarLoading();
-    },2000)
+    if(this.data.loading==true){
+      this.setData({
+        loading:false
+      })
+      wx.request({
+        url: wx.getStorageSync('weburl'), //接口地址
+        data: {
+          api_name: 'car.order.getOrderList',
+          appid: 'cariosappid@u8ms@nsN2G8M2',
+          token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+          firstRow: '52'
+        },
+        header: {
+          "Content-Type": "application/json"
+        },
+        success: function (res) {
+          console.log(res.data);
+          function time(ti) {
+            var da = Number(ti);
+            da = new Date(da);
+            var year = da.getFullYear() + '';
+            var month = da.getMonth() + 1 + '';
+            var date = da.getDate() + '';
+            // console.log([year, month, date].join('/'));
+            return [year, month, date].join('/');
+          }
+          var s_temp = null;
+          s_temp=self.data.order_list;
+          res.data.data.order_list.forEach(function (item, index) {
+            item.addtime = time(item.start_time);
+            item.start_time = time(item.start_time);
+            item.end_time = time(item.end_time);
+            s_temp.push(item);
+          });
+          console.log(s_temp);
+          self.setData({
+            order_list: s_temp
+          })
+        }
+      })
+      setTimeout(function () {
+        wx.hideNavigationBarLoading();
+        self.setData({
+          loading: true
+        })
+      }, 2000)
+    }else{
+      this.setData({
+        loading: false
+      })
+    }
+    
   },
   opentap:function(e){
     console.log(e);
     var self = this;
     var cut = self.data.cut+1;
     if (e.target.dataset.icon=='1'){
-      self.setData({ icon1:'fa-sort-up'})
+      self.setData({ cur_color1: 'red', cur_color2: 'black', cur_color3:'black'});
     } else if (e.target.dataset.icon == '2'){
-      self.setData({ icon2: 'fa-sort-up' })
+      self.setData({ cur_color1: 'black', cur_color2: 'red', cur_color3: 'black' });
     }else{
-      self.setData({ icon3: 'fa-sort-up' })
+      self.setData({ cur_color1: 'black', cur_color2: 'black', cur_color3: 'red' });
     }
     self.setData({
       'cut': cut
@@ -87,9 +143,6 @@ Page({
       self.setData({
         'animate_': '0'
       });
-      self.setData({ icon1: 'fa-sort-down' });
-      self.setData({ icon2: 'fa-sort-down' });
-      self.setData({ icon3: 'fa-sort-down' });
     }else{      
       self.setData({
         'animate_': '0'//代发
