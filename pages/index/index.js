@@ -58,10 +58,11 @@ Page({
             "Content-Type": "application/json"
           },
           success: function (res) {
-            //console.log(res.data);
+            //console.log(res.data.data[0].item_id);
             var temp = res.data.data;
             var list1 = temp.shift();
             var list2 = temp;
+            wx.setStorageSync('cur_car_id', temp[0].item_id)
             //console.log(list1);
             //console.log(list2);
             //console.log(that.data.teach_area_id)
@@ -94,7 +95,7 @@ Page({
             }
           }
         })
-      }else{
+      }else{//获得非绑定车辆
         wx.request({
           url: url, //接口地址
           data: {
@@ -131,7 +132,7 @@ Page({
               //console.log(list2)
               //classList=classList.concat(classList);
               var classArr = classList.map(function (item, index) {
-                //console.log(item)
+               // console.log(item)
                 return item.plate_num;
               })
               var xiaoquArr = that.data.xiaoquArr;
@@ -147,7 +148,8 @@ Page({
     }
   },
   bindMultiPickerColumnChange: function (e) {
-   
+    var self=this;
+    //console.log(e);
     //e.detail.column 改变的数组下标列, e.detail.value 改变对应列的值
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     var data = {
@@ -155,6 +157,19 @@ Page({
       multiIndex: this.data.multiIndex
     };
     data.multiIndex[e.detail.column] = e.detail.value;
+    var temp_data =null;
+    console.log(self.data.classList[e.detail.column])
+    if (e.detail.value==0){
+      temp_data = self.data.classList[0];
+      wx.setStorageSync('cur_car_id', temp_data.item_id);
+      console.log(temp_data.item_id);
+    }else{
+      temp_data = self.data.classList[e.detail.column]
+      wx.setStorageSync('cur_car_id', temp_data.item_id);
+      console.log(temp_data.item_id);
+    }
+   // wx.setStorageSync('cur_car_id',self.data.classList[e.detail.value].item_id);
+    //console.log(wx.getStorageSync('cur_car_id'));
     var teach_area_id_session = this.data.teach_area_id;　　　　// 保持之前的校区id 与新选择的id 做对比，如果改变则重新请求数据
     switch (e.detail.column) {
       case 0:
@@ -188,7 +203,8 @@ Page({
       multiIndex: e.detail.value,
       chosecar:''
     })
-    wx.setStorageSync('cur_car_id', '87' )
+    console.log(wx.getStorageSync('cur_car_id'))
+    //wx.setStorageSync('cur_car_id', '87' )
     wx.navigateTo({
       url: '../calendar/calendar',
     })
