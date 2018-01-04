@@ -26,8 +26,7 @@ Page({
   changeinfo:function(e){
     //console.log(e);  
     var self=this;
-    console.log(e)
- 
+    //console.log(e)
   },
   onShow:function(){
     console.log(wx.getStorageSync('carList'));
@@ -42,57 +41,109 @@ Page({
     //console.log(xiaoqu_id)
     if (xiaoqu_id) {
       this.setData({
-        teach_area_id: xiaoqu_id
+        teach_area_id: xiaoqu_id,
+        chosecar:''
       });
       var url = wx.getStorageSync('weburl');
-      wx.request({
-        url: url, //接口地址
-        data: {
-          api_name: 'car.car.getCarList',
-          appid: wx.getStorageSync('appid'),
-          token: wx.getStorageSync('token'),
-          PHPSESSID: wx.getStorageSync('phpsessid')
-        },
-        header: {
-          "Content-Type": "application/json"
-        },
-        success: function (res) {
-          console.log(res.data);
-          var temp=res.data.data;
-          var list1=temp.shift();
-          var list2=temp;
-          console.log(list1);
-          console.log(list2);
-          if(that.data.teach_area_id==0){
-            var classList = [list1];
-            var classArr = classList.map(function (item, index) {
-              return item.plate_num;
-            })
-            //classArr.unshift('全部车辆');　　　　　　
-            var xiaoquArr = that.data.xiaoquArr;
-            that.setData({
-              multiArray: [xiaoquArr, classArr],
-              classArr,
-              classList
-            })
-          }else{
-            var classList = list2;
-             console.log(list2)
-            //classList=classList.concat(classList);
-            var classArr = classList.map(function (item, index) {
-              return item.plate_num;
-            })
-            var xiaoquArr = that.data.xiaoquArr;
-            that.setData({
-              multiArray: [xiaoquArr, classArr],
-              classArr,
-              classList
-            })
+      if(xiaoqu_id==0){
+        wx.request({
+          url: url, //接口地址
+          data: {
+            api_name: 'car.car.getCarList',
+            appid: wx.getStorageSync('appid'),
+            token: wx.getStorageSync('token'),
+            PHPSESSID: wx.getStorageSync('phpsessid')
+          },
+          header: {
+            "Content-Type": "application/json"
+          },
+          success: function (res) {
+            //console.log(res.data);
+            var temp = res.data.data;
+            var list1 = temp.shift();
+            var list2 = temp;
+            //console.log(list1);
+            //console.log(list2);
+            //console.log(that.data.teach_area_id)
+            if (that.data.teach_area_id == '0') {
+              var classList = [list1];
+              var classArr = classList.map(function (item, index) {
+                return item.plate_num;
+              })
+              //classArr.unshift('全部车辆');　　　　　　
+              var xiaoquArr = that.data.xiaoquArr;
+              that.setData({
+                multiArray: [xiaoquArr, classArr],
+                classArr,
+                classList
+              })
+            } else {
+              var classList = list2;
+              //console.log(list2)
+              //classList=classList.concat(classList);
+              var classArr = classList.map(function (item, index) {
+                //console.log(item)
+                return item.plate_num;
+              })
+              var xiaoquArr = that.data.xiaoquArr;
+              that.setData({
+                multiArray: [xiaoquArr, classArr],
+                classArr,
+                classList
+              })
+            }
           }
-        }
-      })
-    
-
+        })
+      }else{
+        wx.request({
+          url: url, //接口地址
+          data: {
+            api_name: 'car.car.getRecommendCarList',
+            appid: wx.getStorageSync('appid'),
+            token: wx.getStorageSync('token'),
+            PHPSESSID: wx.getStorageSync('phpsessid')
+          },
+          header: {
+            "Content-Type": "application/json"
+          },
+          success: function (res) {
+           // console.log(res.data);
+            var temp = res.data.data;
+            //var list1 = temp.shift();
+            var list2 = temp;
+            //console.log(list1);
+            //console.log(list2);
+            //console.log(that.data.teach_area_id)
+            if (that.data.teach_area_id == '0') {
+              var classList = [list1];
+              var classArr = classList.map(function (item, index) {
+                return item.plate_num;
+              })
+              //classArr.unshift('全部车辆');　　　　　　
+              var xiaoquArr = that.data.xiaoquArr;
+              that.setData({
+                multiArray: [xiaoquArr, classArr],
+                classArr,
+                classList
+              })
+            } else {
+              var classList = list2;
+              //console.log(list2)
+              //classList=classList.concat(classList);
+              var classArr = classList.map(function (item, index) {
+                //console.log(item)
+                return item.plate_num;
+              })
+              var xiaoquArr = that.data.xiaoquArr;
+              that.setData({
+                multiArray: [xiaoquArr, classArr],
+                classArr,
+                classList
+              })
+            }
+          }
+        })
+      }
     }
   },
   bindMultiPickerColumnChange: function (e) {
@@ -160,10 +211,10 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data);
+        //console.log(res.data);
         var xiaoquList = [{ "teach_area_id": "0", "teach_area_name": "绑定车辆"}, { "teach_area_id": "1", "teach_area_name": "其他车辆" }];
         var xiaoquArr = xiaoquList.map(function(item,index){　　　　// 此方法将区分到一个新数组中
-        console.log(item)
+        //console.log(item)
           return item.teach_area_name;
         });
         self.setData({
