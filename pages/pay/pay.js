@@ -34,15 +34,16 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        wx.setStorageSync('pay_id', res.data.data.pay_id);
         function getLocalTime(nS) {
           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
         } 
-        var temp = res.data.data;
+        var temp = res.data.data.data;
         temp.forEach(function (item, index){
           item.start_time = getLocalTime(item.start_time);
           item.end_time = getLocalTime(item.end_time);
         })
-        self.setData({ payinfo:temp})
+        self.setData({ payinfo: temp, all_fee: res.data.data.total_fee})
       }
     })//////////////////////////
     wx.request({
@@ -102,7 +103,25 @@ Page({
   onReachBottom: function () {
   
   },
-
+  paymoney:function(){
+    var self=this;
+    wx.request({
+      url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+      data: {
+        api_name: 'car.pay.payOrder',
+        appid: 'cariosappid@u8ms@nsN2G8M2',
+        token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+        PHPSESSID:wx.getStorageSync('phpsessid'),
+        pay_id:wx.getStorageSync('pay_id')
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */

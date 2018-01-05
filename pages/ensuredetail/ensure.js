@@ -57,11 +57,27 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data);
+        //console.log(JSON.parse(JSON.stringify(res.data.data.use_info)))
+        var temp = res.data.data.temp_info.use_info;
+        function fmtDate(obj) {
+          var date = new Date(obj);
+          var y = 1900 + date.getYear();
+          var m = "0" + (date.getMonth() + 1);
+          var d = "0" + date.getDate();
+          return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
+        }
+        for(let x in temp){
+          temp[x].s_time = fmtDate(temp[x].start_time);
+          temp[x].e_time = fmtDate(temp[x].end_time);
+          console.log(temp[x].s_time)
+        }
         self.setData({
-          'orderdetails':res.data.data,
-           userinfo: res.data.data.use_info
-        })
+          orderdetails: res.data.data.user_info,
+          userinfo: res.data.data.temp_info,
+          all_fee: res.data.data.temp_info.total_fee,
+          info:res.data.data.temp_info.use_info
+        });
+        //console.log(self.data.info)
       }
     })
   },

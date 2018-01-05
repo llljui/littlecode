@@ -56,7 +56,8 @@ Page({
           iconimg: img,
           item_name: res.data.data.item_name,
           plate_num: res.data.data.plate_num,
-          userinfo: userinfo
+          userinfo: userinfo,
+          total_fee: res.data.data.total_fee
         })
         console.log(self.data.userinfo)
         //wx.setStorageSync('order_time', '')

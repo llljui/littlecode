@@ -23,17 +23,17 @@
     <view class='bor'></view>
     <view class="section">
         <view class="section__title">车辆</view>
-        <input name="carname" disabled value='{{orderdetails.item_name}}' />
+        <input name="carname" disabled value='{{userinfo.item_name}}' />
     </view>
     <view class="section">
         <view class="section__title">车牌号</view>
-        <input name="carplate" disabled='disabled' value='{{orderdetails.plate_num}}' />
+        <input name="carplate" disabled='disabled' value='{{userinfo.plate_num}}' />
     </view>
     <view class='bor'></view>
     <view class='vh_'>
-     <view wx:for="{{userinfo}}" wx:key="index">
+     <view wx:for="{{info}}" wx:key="index">
       <view> 
-        <view class='time'>起始 {{item.start_time}} 至 结束 {{item.end_time}} </view>
+        <view class='time'>起始 {{item.s_time}} 至 结束 {{item.e_time}} </view>
       </view>
       <view> 
         <view class='time'>共{{item.day_num}}天  <text class='price'>{{item.price}}元</text></view>
@@ -47,4 +47,4 @@
         <button formType="submit" type="warn" size="mini">提交订单</button>
     </view>
 </form>
-<view class='allprice'>¥1233元</view>
+<view class='allprice'>¥{{all_fee}}元</view>

@@ -19,6 +19,6 @@
   </view>
 </view>
 <view class='footer'>
-  <view><text>需支付:</text><text class='money'>1680</text>.00元</view>
-  <view><button type='danger' size='mini' class='payit'>立即支付</button></view>
+  <view><text>需支付:</text><text class='money'>{{all_fee}}</text>.00元</view>
+  <view><button type='danger' size='mini' class='payit' catchtap='paymoney'>立即支付</button></view>
 </view>

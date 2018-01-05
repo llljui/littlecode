@@ -1,6 +1,6 @@
 <view class='header_'>
-  <view class='span_33' catchtap='opentap' data-icon="1" style='color:{{cur_color1}}'>全部</view>
-  <view class='span_33' catchtap='opentap' data-icon="2" style='color:{{cur_color2}}'>用车中</view>
+  <view class='span_33' catchtap='opentap' data-icon="1" style='color:{{cur_color1}}'>正在使用</view>
+  <view class='span_33' catchtap='opentap' data-icon="2" style='color:{{cur_color2}}'>待取车</view>
   <view class='span_33' catchtap='opentap' data-icon="3" style='color:{{cur_color3}}'>已还车</view>
 </view>
 <view class='contain'>

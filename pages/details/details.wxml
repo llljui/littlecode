@@ -21,6 +21,6 @@
      
   </view>
   <view class='bod'></view>
-  <view class='allprice'>¥1800<text class='txt'>.00</text>元</view>
+  <view class='allprice'>¥{{total_fee}}<text class='txt'>.00</text>元</view>
   <view class='submit'><button type="warn" catchtap='setorder'>提交</button></view>
 </view>
