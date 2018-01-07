@@ -1,7 +1,7 @@
 Page({
   data: {
     loading:true,
-    cur_color1:'red',
+    cur_color1:'#00CCFF',
     icon1:'fa-sort-down',
     icon2: 'fa-sort-down',
     icon3: 'fa-sort-down',
@@ -18,7 +18,8 @@ Page({
     cartype:'奔驰-2016',
     price:'1000',
     order_list: [],
-    status:'2'
+    status:'2',
+    xline:'2.5vw'
   },
   onLoad: function () {
     var self=this;
@@ -39,15 +40,24 @@ Page({
         function time(ti){
           var da = Number(ti);
           da = new Date(da);
-          var year = da.getFullYear() + '';
-          var month = da.getMonth() + 1 + '';
-          var date = da.getDate() + '';
+          var year = da.getFullYear() + '年';
+          var month = da.getMonth() + 1 + '月';
+          var date = da.getDate() + '日';
          // console.log([year, month, date].join('/'));
-          return [year, month, date].join('/');
+          return [year, month, date].join('');
         }
+        function formatDate(now) {
+          var year = now.getYear();
+          var month = now.getMonth() + 1;
+          var date = now.getDate();
+          var hour = now.getHours();
+          var minute = now.getMinutes();
+          var second = now.getSeconds();
+          return "20" + year + "年" + month + "月" + date + "日 " + hour + ":" + minute + ":" + second;
+        } 
         var s_temp=null;
         res.data.data.order_list.forEach(function(item,index){
-          item.addtime = time(item.start_time);
+          item.addtime = new Date(parseInt(item.addtime) * 1000).toLocaleString().replace(/\\/, '-');
           item.start_time = time(item.start_time);
           item.end_time = time(item.end_time);
         })
@@ -82,47 +92,47 @@ Page({
         this.setData({
           loading: false
         })
-        wx.request({
-          url: wx.getStorageSync('weburl'), //接口地址
-          data: {
-            api_name: 'car.order.getOrderList',
-            appid: 'cariosappid@u8ms@nsN2G8M2',
-            token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
-            firstRow: self.data.cur_page,
-            order_status: self.data.status
-          },
-          header: {
-            "Content-Type": "application/json"
-          },
-          success: function (res) {
-            console.log(res.data);
-            function time(ti) {
-              var da = Number(ti);
-              da = new Date(da);
-              var year = da.getFullYear() + '';
-              var month = da.getMonth() + 1 + '';
-              var date = da.getDate() + '';
-              // console.log([year, month, date].join('/'));
-              return [year, month, date].join('/');
-            }
-            var s_temp = null;
-            s_temp = self.data.order_list;
-            res.data.data.order_list.forEach(function (item, index) {
-              item.addtime = time(item.start_time);
-              item.start_time = time(item.start_time);
-              item.end_time = time(item.end_time);
-              s_temp.push(item);
-            });
-            console.log(s_temp);
-            self.setData({
-              order_list: s_temp,
-              cur_page: res.data.data.NextFirstRow,
-              all_total: res.data.data.total
-            })
-          }
-        })
         setTimeout(function () {
           wx.hideNavigationBarLoading();
+          wx.request({
+            url: wx.getStorageSync('weburl'), //接口地址
+            data: {
+              api_name: 'car.order.getOrderList',
+              appid: 'cariosappid@u8ms@nsN2G8M2',
+              token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+              firstRow: self.data.cur_page,
+              order_status: self.data.status
+            },
+            header: {
+              "Content-Type": "application/json"
+            },
+            success: function (res) {
+              console.log(res.data);
+              function time(ti) {
+                var da = Number(ti);
+                da = new Date(da);
+                var year = da.getFullYear() + '年';
+                var month = da.getMonth() + 1 + '月';
+                var date = da.getDate() + '日';
+                // console.log([year, month, date].join('/'));
+                return [year, month, date].join('');
+              }
+              var s_temp = null;
+              s_temp = self.data.order_list;
+              res.data.data.order_list.forEach(function (item, index) {
+                item.addtime = new Date(parseInt(item.addtime) * 1000).toLocaleString().replace(/\\/, '-');
+                item.start_time = time(item.start_time);
+                item.end_time = time(item.end_time);
+                s_temp.push(item);
+              });
+              console.log(s_temp);
+              self.setData({
+                order_list: s_temp,
+                cur_page: res.data.data.NextFirstRow,
+                all_total: res.data.data.total
+              })
+            }
+          })
           self.setData({
             loading: true
           })
@@ -143,11 +153,11 @@ Page({
     var self = this;
     var cut = self.data.cut+1;
     if (e.target.dataset.icon=='1'){
-      self.setData({ cur_color1: 'red', cur_color2: 'black', cur_color3:'black',status:'2'});
+      self.setData({ cur_color1: '#87CEFA', cur_color2: 'black', cur_color3:'black',status:'2',xline:'2.5vw'});
     } else if (e.target.dataset.icon == '2'){
-      self.setData({ cur_color1: 'black', cur_color2: 'red', cur_color3: 'black',status:'1' });
+      self.setData({ cur_color1: 'black', cur_color2: '#87CEFA', cur_color3: 'black',status:'1' ,xline:'35vw'});
     }else{
-      self.setData({ cur_color1: 'black', cur_color2: 'black', cur_color3: 'red', status: '3' });
+      self.setData({ cur_color1: 'black', cur_color2: 'black', cur_color3: '#87CEFA', status: '3',xline:'67.5vw' });
     }
 //-------------------------------请求--------------------------------------------------//
     self.setData({
@@ -170,16 +180,16 @@ Page({
         function time(ti) {
           var da = Number(ti);
           da = new Date(da);
-          var year = da.getFullYear() + '';
-          var month = da.getMonth() + 1 + '';
-          var date = da.getDate() + '';
+          var year = da.getFullYear() + '年';
+          var month = da.getMonth() + 1 + '月';
+          var date = da.getDate() + '日';
           // console.log([year, month, date].join('/'));
-          return [year, month, date].join('/');
+          return [year, month, date].join('');
         }
         var s_temp = null;
         s_temp = self.data.order_list;
         res.data.data.order_list.forEach(function (item, index) {
-          item.addtime = time(item.start_time);
+          item.addtime = new Date(parseInt(item.addtime) * 1000).toLocaleString().replace(/\\/, '-');
           item.start_time = time(item.start_time);
           item.end_time = time(item.end_time);
           s_temp.push(item);

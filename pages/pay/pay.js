@@ -7,12 +7,7 @@ Page({
   data: {
     user_order_detail: [],
     items: [
-      { name: 'USA', value: '美国' },
-      { name: 'CHN', value: '中国', checked: 'true' },
-      { name: 'BRA', value: '巴西' },
-      { name: 'JPN', value: '日本' },
-      { name: 'ENG', value: '英国' },
-      { name: 'TUR', value: '法国' },
+      
     ]
   },
 
@@ -118,7 +113,18 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data)
+        console.log(res.data);
+        if(res.data.code==0){
+          console.log(0)
+          wx.switchTab({
+            url: '../index/index',
+            success: function(res) {console.log(res)},
+            fail: function (res) { console.log(res)},
+            complete: function (res) { console.log(res)},
+          })
+        }else{
+
+        }
       }
     })
   },

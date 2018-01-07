@@ -40,9 +40,16 @@ Page({
           img.push(wx.getStorageSync('domain') + item);
         });
         // console.log(res.data.data.use_info);
-        function getLocalTime(nS) {
-          return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
-        }
+        function getLocalTime(ti) {
+          var da = Number(ti);
+          da = new Date(da);
+          var year = da.getFullYear() + '年';
+          var month = da.getMonth() + 1 + '月';
+          var date = da.getDate() + '日';
+          // console.log([year, month, date].join('/'));
+          return [year, month, date].join('');
+        }     
+        
         for (let x in res.data.data.use_info) {
           let temp = res.data.data.use_info[x];
           // console.log('在此');

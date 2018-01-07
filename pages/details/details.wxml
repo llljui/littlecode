@@ -12,13 +12,12 @@
   <view class='body'>
      <view wx:for="{{userinfo}}" wx:key="index">
       <view> 
-        <view class='time'>起始 {{item.start_time}} 至 结束 {{item.end_time}} </view>
+        <view class='time'>租赁时间 {{item.start_time}} 至 {{item.end_time}} </view>
       </view>
       <view> 
-        <view class='time'>共{{item.day_num}}天  <text class='price'>{{item.price}}元</text></view>
+        <view class='time'>共{{item.day_num}}天  <text class='price'>{{item.price}}元      </text></view>
       </view>
-     </view>
-     
+     </view> 
   </view>
   <view class='bod'></view>
   <view class='allprice'>¥{{total_fee}}<text class='txt'>.00</text>元</view>
