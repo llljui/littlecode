@@ -6,9 +6,7 @@ Page({
    */
   data: {
     user_order_detail: [],
-    items: [
-      
-    ]
+    items: []
   },
 
   /**

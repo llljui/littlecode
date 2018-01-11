@@ -277,7 +277,7 @@ Page({
             self.setData({
               left_day:res.data.data.left_day,
               left_km: res.data.data.left_km,
-              bg_img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514195746053&di=71f19cf88466a05ba0a4b0f2a22128bc&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201502%2F10%2F20150210133921_WB3QV.jpeg'//wx.getStorageSync('domain')+res.data.data.b_pic_path
+              bg_img: wx.getStorageSync('domain')+res.data.data.b_pic_path
             })
           }
         })

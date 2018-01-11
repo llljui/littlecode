@@ -1,7 +1,17 @@
 <!--logs.wxml-->
 <view class="con">
-  <view class='top'>
-    <image src="item" class='img' wx:for="{{img}}" wx:key="index"></image>  
+  <view class='top' style='width:{{img_width}}px;height:{{img_height}}px;'>
+   <!--<image src="{{item}}" class='img' wx:for="{{iconimg}}" wx:key="index"></image>  -->
+  <swiper indicator-dots="{{indicatorDots}}"
+   style='width:{{img_width}}px;height:{{img_height}}px;'
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{iconimg}}" wx:key="index">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" style='width:{{img_width}}px;height:{{img_height}}px;'/>
+        </swiper-item>
+      </block>
+  </swiper>
+
   </view>
   <view class='bod'></view>
   <view class='content'>

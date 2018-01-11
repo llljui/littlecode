@@ -124,7 +124,7 @@ const conf = {
             choosed: true,
             active:'red'
           });
-          console.log(item)
+          //console.log(item)
         });
         self.setData({
           days

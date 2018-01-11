@@ -1,4 +1,4 @@
-<view class='hed_'>请如实填写一下信息</view>
+<view class='hed_'>请如实填写以下信息</view>
 <form bindsubmit="formSubmit" bindreset="formReset">
     <view class="section">
         <view class="section__title">昵称</view>
@@ -10,15 +10,15 @@
     </view>
     <view class="section">
         <view class="section__title">手机号</view>
-        <input name="mobile" placeholder="请输入联系人号码" value='{{orderdetails.mobile}}' />
+        <input name="mobile" placeholder="请输入联系人号码" type="number" value='{{orderdetails.mobile}}' />
     </view>
     <view class="section">
         <view class="section__title">驾驶证</view>
-        <input name="carid" placeholder="请输入驾驶证号" value='{{orderdetails.driver_license_number}}' />
+        <input name="carid" placeholder="请输入驾驶证号" type="number" value='{{orderdetails.driver_license_number}}' />
     </view>
     <view class="section">
         <view class="section__title">身份证</view>
-        <input name="personid" placeholder="请输入身份证号" value='{{orderdetails.id}}' />
+        <input name="personid" placeholder="请输入身份证号" type="idcard" value='{{orderdetails.id}}' />
     </view>
     <view class='bor'></view>
     <view class="section">
