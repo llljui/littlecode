@@ -80,7 +80,8 @@
 				{
 					"id": -1,
 					"name": "pay",
-					"pathName": "pages/pay/pay"
+					"pathName": "pages/pay/pay",
+					"query": ""
 				}
 			]
 		}

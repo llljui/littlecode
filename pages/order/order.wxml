@@ -9,18 +9,20 @@
 <view class='contain'>
 <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true" scroll-with-animation="true" style="height:{{scrollHeight}};">
   <view class='scroll_view' wx:for="{{order_list}}" wx:key="index">
-    <view class='orderid'>订单号：{{item.order_sn}}</view>
-    <view>创建时间：{{item.addtime}}</view>
+    <view class='orderid' style='color:#909399;'>订单号：<text class='flr'>{{item.order_sn}}</text></view>
+    <view style='color:#909399;'>创建时间：<text class='flr'>{{item.addtime}}</text></view>
     <view class='bord'></view>
-    <view class='auth'>姓名：{{item.realname}}</view><view  class='auth'>电话：{{item.mobile}}</view>
-    <view><text style='color:#626262'>驾驶证： {{item.driver_license_number}}</text></view>
-    <view><text style='color:#626262;font-family:宋体;'>租赁时间：{{item.start_time}} 至 {{item.end_time}}</text></view>
-    <view class='status'>状态：<text style='color:red'>{{item.order_status_name}}</text></view>
-    <view style='color:#626262'>订单总价：<text style=''>¥{{item.total_amount}}</text></view>
-    <view style='margin-bottom:2vh;'>实付款：<text style='color:red'>¥{{item.pay_amount}}</text><icon class='fa fa-hand-o-left' style='float:right;margin-right:3vw'></icon></view>
+    <view class='' style='color:#909399;'>姓名：<text class='flr'>{{item.realname}}</text></view>
+    <view  class='' style='color:#909399;'>电话：<text class='flr'>{{item.mobile}}</text></view>
+    <view><text style='color:#909399;'>驾驶证：<text class='flr' style='color:#909399'>{{item.driver_license_number}}</text></text></view>
+    <view><text style='color:#626262;font-family:宋体;color:#909399'>租赁时间：<text class='flr'>{{item.start_time}} 至 {{item.end_time}}</text></text></view>
+    <view class='status' style='color:#909399;'>状态：<text class='flr' style='color:red'>{{item.order_status_name}}</text></view>
+    <view style='color:#909399'>订单总价：<text class='flr'>¥{{item.total_amount}}</text></view>
+    <view style='margin-bottom:2vh;color:#909399'>实付款：<text class='flr' style='color:red'>¥{{item.pay_amount}}</text><!--<icon class='fa fa-hand-o-left' style='float:right;margin-right:3vw'></icon>--></view>
     <view class='line'></view>
   </view>
 </scroll-view>
 </view>
 <view class='bor' style='height:{{animate_}}vh;'></view>
-
+<view class='modal_bg' style='display:{{show}}'></view>
+<view class='modal_bor'  style='display:{{show_2}};transform:translateY({{try}}vh);opacity:{{opacity}};transition:0.5s;'><image src="http://ouao6zxy5.bkt.clouddn.com/timg1.gif" class='loading_' style='display:{{loadshow}}'></image>{{message}}</view>

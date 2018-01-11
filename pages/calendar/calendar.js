@@ -364,8 +364,8 @@ const conf = {
           if (value) {
            // console.log(this.data.cur_year2 + '年' + value + '月' + (idxx + 1) + '日')// 获取当前时间
             borrow2.push(this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' ' + '00:00:00');
-            console.log(this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' ' + '00:00:00')//
-            console.log(this.data.borrow2);
+           // console.log(this.data.cur_year2 + '-' + value + '-' + (idxx + 1) + ' ' + '00:00:00')//
+           // console.log(this.data.borrow2);
             this.setData({
               borrow2
             })          }

@@ -181,8 +181,8 @@ Page({
     this.setData(data);
   },
   bindMultiPickerChange: function (e) {
-    console.log(e)
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    //console.log(e)
+    //console.log('picker发送选择改变，携带值为', e.detail.value)
     var class_key = 0;
     var classList = this.data.classList;
     var select_key = e.detail.value[1];
@@ -200,7 +200,7 @@ Page({
       multiIndex: e.detail.value,
       chosecar:''
     })
-    console.log(wx.getStorageSync('cur_car_id'))
+   // console.log(wx.getStorageSync('cur_car_id'))
     //wx.setStorageSync('cur_car_id', '87' )
     wx.navigateTo({
       url: '../calendar/calendar',

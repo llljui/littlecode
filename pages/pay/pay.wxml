@@ -1,19 +1,18 @@
 <view class='paylist'>
   <view class='paylist_'>
-     <view class='header_'>奔驰GL 浙A6666</view>
-     <view>
+     <view class='header_'>牌照：{{cur_pl}}</view>
+     <view class='header_'>车型：{{cur_name}}</view>
+     <view class='maxh'>
         <view wx:for="{{payinfo}}" wx:key="index">
-          <view> 
-            <view class='time'>{{item.start_time}} 至 {{item.end_time}} </view>
-          </view>
-          <view> 
-            <view class='time'>共{{item.days}}天  <text class='price'>{{item.pay_amount}}元</text></view>
+            <view class='time'>时间：{{item.start_time}} 至 {{item.end_time}} </view>
+        <view> 
+            <view class='time' >总计：共 <text style='color:red;font-size:32rpx;'>{{item.days}}</text> 天  <text class='price'>{{item.pay_amount}}</text> 元 </view>
           </view>
         </view>
      </view>
   </view>
-  <view class='pay_'>请选择支付方式</view>
   <view class='methods'>
+  
       <image src="http://ouao6zxy5.bkt.clouddn.com/UbnPZ" ></image>
       <view class='radio bg'></view>
   </view>
@@ -22,3 +21,5 @@
   <view><text>需支付:</text><text class='money'>{{all_fee}}</text>.00元</view>
   <view><button type='danger' size='mini' class='payit' catchtap='paymoney'>立即支付</button></view>
 </view>
+<view class='modal_bg'  style='display:{{show}}'></view>
+<view class='modal_bor'  style='display:{{show_2}};transform:translateY({{try}}vh);opacity:{{opacity}};transition:0.5s;'>{{message}}</view>

@@ -6,7 +6,11 @@
 .bord{width: 100vw;height: 1px;border-color: #B4BCCC;}
 .orderid{margin-top: 3vh;color:'#434343'}
 .scroll_view>view{text-indent: 1em;font-family: '宋体';font-size: 30rpx;color: #606266;line-height: 4vh;}
-.line{width: 96vw;height: 1px;border-bottom: 1px solid #B4BCCC;margin: auto;color: #dddddd}
+.line{width: 100vw;height: 1px;border-bottom: 5px solid #f7f7f7;margin: auto;color: #dddddd}
 .auth{display: inline-block;width: 50vw;color:'#434343'}
 .line_{width: 30vw;height: 0.5vh;display: block;background-color: #87CEFA;transition: 0.5s;}
 .slider_{display: block;width: 100%;height: 6vh;}
+.modal_bg{position: fixed;top: 0;left: 0;right: 0;bottom:0;margin: auto;width: 100vw;height: 100vh;background: black;opacity: 0.6;z-index: 99999999998;}
+.loading_{width: 100%;height: 100%;vertical-align: middle;}
+.modal_bor{position: fixed;top: -30vh;left: 0;right: 0;bottom:0;margin: auto;width: 15vh;height: 15vh;background:white;border-radius: 5px;z-index:99999999999;transform: translateY(-20vh);opacity: 0;overflow-y: scroll;font-family: '宋体';color: #626262;line-height:8vh;padding:0 3vw;text-align: center;font-size: 30rpx;}
+.flr{float: right;margin-right: 2vw;color:#909399;}

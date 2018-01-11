@@ -6,7 +6,13 @@ Page({
    */
   data: {
     user_order_detail: [],
-    items: []
+    items: [],
+    show: 'none',
+    show_2: 'none',
+    try: '0',
+    opacity: '0',
+    cur_pl:wx.getStorageSync('cur_pl'),
+    cur_name:wx.getStorageSync('cur_name')
   },
 
   /**
@@ -14,6 +20,7 @@ Page({
    */
   onLoad: function (options) {
     var self=this;
+    console.log(wx.getStorageSync('cur_name'))
     wx.request({
       url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
       data: {
@@ -28,8 +35,20 @@ Page({
       success: function (res) {
         console.log(res.data);
         wx.setStorageSync('pay_id', res.data.data.pay_id);
-        function getLocalTime(nS) {
-          return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+        function getLocalTime(ti) {
+          var da = new Date(ti);
+          //console.log(da)
+          function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+          }
+          // console.log(getLocalTime(ti));
+          var time = getLocalTime(ti).split(' ')[0].split('/');
+          // console.log(time)
+          var year = time[0] + '年';
+          var month = time[1] + '月';
+          var date = time[2] + '日';
+          // console.log([year, month, date].join('/'));
+          return [year, month, date].join('');
         } 
         var temp = res.data.data.data;
         temp.forEach(function (item, index){
@@ -114,14 +133,52 @@ Page({
         console.log(res.data);
         if(res.data.code==0){
           console.log(0)
-          wx.switchTab({
-            url: '../index/index',
-            success: function(res) {console.log(res)},
-            fail: function (res) { console.log(res)},
-            complete: function (res) { console.log(res)},
+          self.setData({
+            show: 'block',
+            show_2: 'block',
+            message: '支付成功'
           })
+          setTimeout(function () {
+            self.setData({
+              show_2: 'block',
+              try: '10',
+              opacity: '1'
+            })
+          }, 10)
+          setTimeout(function(){
+            self.setData({
+              show: 'none',
+              show_2: 'none',
+              message: '支付成功'
+            })
+            wx.switchTab({
+              url: '../index/index',
+              success: function (res) { console.log(res) },
+              fail: function (res) { console.log(res) },
+              complete: function (res) { console.log(res) },
+            })
+          },3000)
+         
         }else{
-
+          self.setData({
+            show: 'block',
+            show_2: 'block',
+            message: res
+          })
+          setTimeout(function () {
+            self.setData({
+              show_2: 'block',
+              try: '10',
+              opacity: '1'
+            })
+          }, 10);
+          setTimeout(function () {
+            self.setData({
+              show: 'none',
+              show_2: 'none',
+              message: ''
+            })
+          }, 3000)
         }
       }
     })
@@ -130,7 +187,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+   
   } ,
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value);

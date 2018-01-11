@@ -26,7 +26,7 @@ Page({
     var self = this;
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res)
+       // console.log(res)
         self.setData({
           img_width: res.screenWidth,
           img_height: 180 * (res.screenWidth / 375)
@@ -36,9 +36,9 @@ Page({
     var orderTime_temp = [];
     wx.getStorageSync('order_time').forEach(function (item, index) {
       orderTime_temp.push((Date.parse(new Date(item)) / 1000));
-      console.log((Date.parse(new Date(item)) / 1000))
+     // console.log((Date.parse(new Date(item)) / 1000))
     })
-    console.log(orderTime_temp);
+    //console.log(orderTime_temp);
     wx.request({
       url: wx.getStorageSync('weburl'), //接口地址
       data: {
@@ -52,14 +52,14 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log(res.data);
+      //  console.log(res.data);
         wx.setStorageSync('order_temp_id', res.data.data.order_temp_id);
         var img = [];
         var userinfo = [];
         res.data.data.item_photo.forEach(function (item, index) {
           img.push(wx.getStorageSync('domain') + item);
         });
-        console.log(img)
+       // console.log(img)
         // console.log(res.data.data.use_info);
         function getLocalTime(ti) {
           //console.log(ti);
@@ -70,7 +70,7 @@ Page({
           }
          // console.log(getLocalTime(ti));
           var time = getLocalTime(ti).split(' ')[0].split('/');
-          console.log(time)
+         // console.log(time)
           var year = time[0] + '年';
           var month = time[1]+ '月';
           var date = time[2] + '日';
@@ -84,7 +84,7 @@ Page({
           // console.log(res.data.data.use_info[x]);
           temp.start_time = getLocalTime(res.data.data.use_info[x].start_time).split(' ')[0];
           temp.end_time = getLocalTime(res.data.data.use_info[x].end_time).split(' ')[0];
-          console.log(temp.end_time)
+         // console.log(temp.end_time)
           userinfo.push(temp);
 
         }
@@ -95,7 +95,7 @@ Page({
           userinfo: userinfo,
           total_fee: res.data.data.total_fee
         })
-        console.log(self.data.userinfo)
+       // console.log(self.data.userinfo)
         //wx.setStorageSync('order_time', '')
       }
     })

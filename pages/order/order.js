@@ -19,7 +19,11 @@ Page({
     price:'1000',
     order_list: [],
     status:'2',
-    xline:'2.5vw'
+    xline:'2.5vw',
+    show: 'none',
+    show_2: 'none',
+    try: '0',
+    opacity: '0'
   },
   onLoad: function () {
     var self=this;
@@ -86,12 +90,25 @@ Page({
   bindDownLoad:function(){
     var self=this;
     wx.showNavigationBarLoading();
-    console.log(self.data.cur_page+''+self.data.all_total)
+    //console.log(self.data.cur_page+''+self.data.all_total)
+    
     if(this.data.loading==true){
       if (self.data.all_total >= self.data.cur_page){
         this.setData({
           loading: false
         })
+        self.setData({
+          show: 'block',
+          show_2: 'block',
+          message: ''
+        })
+        setTimeout(function () {
+          self.setData({
+            show_2: 'block',
+            try: '10',
+            opacity: '1'
+          })
+        }, 10)////////等待
         setTimeout(function () {
           wx.hideNavigationBarLoading();
           wx.request({
@@ -109,11 +126,17 @@ Page({
             success: function (res) {
               console.log(res.data);
               function time(ti) {
-                var da = Number(ti);
-                da = new Date(da);
-                var year = da.getFullYear() + '年';
-                var month = da.getMonth() + 1 + '月';
-                var date = da.getDate() + '日';
+                var da = new Date(ti);
+                //console.log(da)
+                function getLocalTime(nS) {
+                  return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+                }
+                // console.log(getLocalTime(ti));
+                var time = getLocalTime(ti).split(' ')[0].split('/');
+                console.log(time)
+                var year = time[0] + '年';
+                var month = time[1] + '月';
+                var date = time[2] + '日';
                 // console.log([year, month, date].join('/'));
                 return [year, month, date].join('');
               }
@@ -136,12 +159,42 @@ Page({
           self.setData({
             loading: true
           })
+          self.setData({
+            show: 'none',
+            show_2: 'none',
+            message: ''
+          })
         }, 2000)
       }else{
         wx.hideNavigationBarLoading();
         console.log('已经到顶了');
       }
     }else{
+      self.setData({
+        loading: true
+      })
+      self.setData({
+        show: 'block',
+        show_2: 'block',
+        loadshow: 'block',
+        message: ''
+      })
+      setTimeout(function () {
+        self.setData({
+          show_2: 'block',
+          try: '10',
+          opacity: '1'
+        })
+      }, 10)
+      setTimeout(function(){
+        self.setData({
+          show: 'none',
+          show_2: 'none',
+          loadshow: 'block',
+          message: ''
+        })
+      },1500)
+     
       this.setData({
         loading: false
       })
@@ -178,11 +231,17 @@ Page({
       success: function (res) {
         console.log(res.data);
         function time(ti) {
-          var da = Number(ti);
-          da = new Date(da);
-          var year = da.getFullYear() + '年';
-          var month = da.getMonth() + 1 + '月';
-          var date = da.getDate() + '日';
+          var da = new Date(ti);
+          //console.log(da)
+          function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+          }
+          // console.log(getLocalTime(ti));
+          var time = getLocalTime(ti).split(' ')[0].split('/');
+          console.log(time)
+          var year = time[0] + '年';
+          var month = time[1] + '月';
+          var date = time[2] + '日';
           // console.log([year, month, date].join('/'));
           return [year, month, date].join('');
         }
