@@ -15,13 +15,13 @@
 .three_>text:first-child{width: 16%;}
 .three_>text:last-child{width: 20%;}
 .two_{width:16%;}
-.hed_{font-family: '宋体';font-size: 30rpx;text-indent: 0em;border-bottom: 1px solid #ddd;height: 42rpx;width: 92vw;margin:0 auto;}
+.hed_{font-family: '宋体';font-size: 30rpx;text-indent: 0em;border-bottom: 1px solid #ddd;height:8vh;width: 100vw;margin:0 auto;line-height: 8vh;background: #409EFF;color: white;text-indent: 1em;box-shadow:0 0 3px #409EFF;}
 .section{margin: 1vh 0;}
-.section>view{font-family: '宋体';font-size: 30rpx;text-indent: 1em;color: #909399;display: inline-block;width: 20vw;height: 50rpx;}
-.section>input{display: inline-block;width: 80vw;font-family: '宋体';font-size: 30rpx;height: 50rpx;overflow: visible;font-weight: lighter;color: #606266;}
+.section>view{font-family: '微软雅黑';font-size: 30rpx;text-indent: 1em;color: #606266;display: inline-block;width: 20vw;height: 50rpx;}
+.section>input{display: inline-block;width: 76vw;font-family: '微软雅黑';font-size: 30rpx;height: 50rpx;overflow: visible;font-weight: lighter;color: #606266;text-align:right;}
 .btn-area{margin-left: 20rpx;}
 .btn-area>button{position: absolute;bottom:1vh;right: 4vw;width: 30vw;height: 70rpx;line-height: 70rpx;font-size: 30rpx;}
-.bor{border-bottom: 1px solid #ddd;width: 92vw;margin: 0 auto;}
+.bor{border-bottom: 10rpx solid #f4f4f4;width: 100vw;margin: 0 auto;}
 .vh_{width: 100vw;height: 40vh;overflow-y: scroll;-webkit-overflow-scrolling: touch;}
 .time{display: inline-block;width:100%;height: 5vh;line-height: 5vh;font-family: '宋体';clear: both;float: left;font-size: 30rpx;color:#909399;text-indent: 1em}
 .price{color: red;}

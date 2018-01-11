@@ -1,18 +1,18 @@
 .con{overflow: hidden}
 .bod{border-bottom: 1px solid #ddd;width:92vw;margin:0 auto;height:1px;}
-.top{width: 100%;height: 26vw;box-shadow: 0 0 5px #ddd;display: block;}
+.top{box-shadow: 0 0 5px #ddd;display: block;}
 .img{width:25vw;height:25vw; margin-left: 4vw;}
 .content{width: 100vw;height: 12.2vh;}
-.car_name,.name,.car_plate,.plate{display: inline-block;height: 6vh;text-indent: 1em;font-family: '宋体';line-height: 6vh;}
-.car_name,.car_plate{width: 12vw;}
-.name,.plate{width:88vw;}
-.car_name,.car_plate{font-size: 30rpx;color:#606266}
-.name,.plate{font-size: 30rpx;color:#303133}
+.car_name,.name,.car_plate,.plate{font-weight: normal;display: inline-block;height: 6vh;text-indent: 1em;font-family: '微软雅黑';line-height: 6vh;}
+.car_name,.car_plate{width: 15vw;}
+.name,.plate{width:85vw;}
+.car_name,.car_plate{font-size: 30rpx;color:#828282}
+.name,.plate{font-size: 30rpx;color:#828282;}
 .body{
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  height: 60vh;
+  height: 47vh;
 }
 .body>view{width:92vw;margin: 0 auto;display: block;height: 5vh;}
 .time{display: inline-block;width:100%;height: 5vh;line-height: 5vh;font-family: '宋体';clear: both;float: left;font-size: 30rpx;color:#909399}
