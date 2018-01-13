@@ -61,12 +61,20 @@ Page({
         var temp = res.data.data.temp_info.use_info;
         wx.setStorageSync('cur_pl', res.data.data.temp_info.plate_num);
         wx.setStorageSync('cur_name', res.data.data.temp_info.item_name)
-        function fmtDate(obj) {
-          var date = new Date(obj);
-          var y = 1900 + date.getYear();
-          var m = "0" + (date.getMonth() + 1);
-          var d = "0" + date.getDate();
-          return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
+        function fmtDate(ti) {
+          var da = new Date(ti);
+          //console.log(da)
+          function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+          }
+          // console.log(getLocalTime(ti));
+          var time = getLocalTime(ti).split(' ')[0].split('/');
+          // console.log(time)
+          var year = time[0] + '年';
+          var month = time[1] + '月';
+          var date = time[2] + '日';
+          // console.log([year, month, date].join('/'));
+          return [year, month, date].join('');
         }
         for(let x in temp){
           temp[x].s_time = fmtDate(temp[x].start_time);

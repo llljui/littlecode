@@ -152,7 +152,7 @@ Page({
               message: '支付成功'
             })
             wx.switchTab({
-              url: '../index/index',
+              url: '../order/order',
               success: function (res) { console.log(res) },
               fail: function (res) { console.log(res) },
               complete: function (res) { console.log(res) },
