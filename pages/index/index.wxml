@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<view style='display:{{pageshow_1}}'>
 <view class="container">
 <image src="{{bg_img}}"  style="height:{{bgheight}}px;width:{{bgwidth}}px" ></image>
 <view class='bigheader_ fd'>合车有道</view>
@@ -40,4 +41,9 @@
         默认
     </toast>
 </view>
+</view>
+</view>
+<view class='modal_bg'  style='display:{{show}}'></view>
+<view class='modal_bor'  style='display:{{show_2}}'>
+<image class='loadings' src="http://ouao6zxy5.bkt.clouddn.com/15CB9F4C-3AA6-47C1-875C-2B39032184B6detail.gif"></image>
 </view>

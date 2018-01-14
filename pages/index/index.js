@@ -5,6 +5,11 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var qqmapsdk;
 Page({
   data: {
+    show: 'none',
+    show_2: 'none',
+    try: '0',
+    opacity: '0',
+    pageshow_1:'none',
     chosecar:'',
     bg_img:null,
     left_day:null,
@@ -211,6 +216,11 @@ Page({
   },
   onLoad: function () {
     var self=this;
+    self.setData({
+        show:'block',
+        show_2:'block'
+    })
+   
     //////////////////////////////////////////////////////////////////////////
     wx.request({
       url: wx.getStorageSync('weburl'), //的接口地址
@@ -242,7 +252,29 @@ Page({
       }
     })
     //////////////////////////////////////////////////////////////////////////
-
+    wx.request({
+      url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
+      data: {
+        api_name: 'car.index.getIndexInfo',
+        appid: 'cariosappid@u8ms@nsN2G8M2',
+        token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
+        PHPSESSID: wx.getStorageSync('phpsessid'),
+        session: wx.getStorageSync('session'),
+        encryptedData: wx.getStorageSync('encryptedData'),
+        iv: wx.getStorageSync('iv')////////////////////////////////这里是首页加载项
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        //console.log(res.data);
+        self.setData({
+          left_day: res.data.data.left_day,
+          left_km: res.data.data.left_km,
+          bg_img: wx.getStorageSync('domain') + res.data.data.b_pic_path
+        })
+      }
+    })
   //  console.log(wx.getSystemInfoSync())
     this.setData({
       bgheight: wx.getSystemInfoSync().windowHeight,
@@ -258,29 +290,23 @@ Page({
         var longitude = res.longitude
         var speed = res.speed
         var accuracy = res.accuracy
-        wx.request({
-          url: wx.getStorageSync('weburl'), //仅为示例，并非真实的接口地址
-          data: {
-            api_name: 'car.index.getIndexInfo',
-            appid: 'cariosappid@u8ms@nsN2G8M2',
-            token: 'CcYjxf0ql8UGg5deWPVYjXQsdRJCBt0u',
-            PHPSESSID: wx.getStorageSync('phpsessid'),
-            session: wx.getStorageSync('session'),
-            encryptedData: wx.getStorageSync('encryptedData'),
-            iv:wx.getStorageSync('iv')////////////////////////////////这里是首页加载项
-          },
-          header: {
-            "Content-Type": "application/json"
-          },
-          success: function (res) {
-            //console.log(res.data);
-            self.setData({
-              left_day:res.data.data.left_day,
-              left_km: res.data.data.left_km,
-              bg_img: wx.getStorageSync('domain')+res.data.data.b_pic_path
-            })
-          }
-        })
+        setTimeout(function(){
+          self.setData({
+            pageshow_1: 'block',
+            show: 'none',
+            show_2: 'none'
+          })
+        },1200)
+       
+      },
+      fail:function(err){
+        setTimeout(function () {
+          self.setData({
+            pageshow_1: 'block',
+            show: 'none',
+            show_2: 'none'
+          })
+        }, 5000)
       }
     })//获取地理位置
       //

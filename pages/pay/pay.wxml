@@ -10,12 +10,14 @@
           </view>
         </view>
      </view>
-  </view>
-  <view class='methods'>
-  
-      <image src="http://ouao6zxy5.bkt.clouddn.com/UbnPZ" ></image>
+     <view class='methods'>
+      <image src="http://ouao6zxy5.bkt.clouddn.com/198E36BD-78EC-487F-8666-5F6C9D1A803C.png" ></image>
+      <view class='wxtext'>微信支付</view>
       <view class='radio bg'></view>
   </view>
+  </view>
+  
+  
 </view>
 <view class='footer'>
   <view><text>需支付:</text><text class='money'>{{all_fee}}</text>.00元</view>

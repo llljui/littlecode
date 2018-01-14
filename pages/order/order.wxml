@@ -25,4 +25,7 @@
 </view>
 <view class='bor' style='height:{{animate_}}vh;'></view>
 <view class='modal_bg' style='display:{{show}}'></view>
-<view class='modal_bor'  style='display:{{show_2}};transform:translateY({{try}}vh);opacity:{{opacity}};transition:0.5s;'><image src="http://ouao6zxy5.bkt.clouddn.com/timg1.gif" class='loading_' style='display:{{loadshow}}'></image>{{message}}</view>
+<view class='modal_bor'  style='display:{{show_2}};transform:translateY({{try}}vh);opacity:{{opacity}};transition:0.5s;'><image src="http://ouao6zxy5.bkt.clouddn.com/15CB9F4C-3AA6-47C1-875C-2B39032184B6detail.gif" class='loading_' style='display:{{loadshow}}'></image>{{message}}</view>
+<image class='nothing' 
+ style='display:{{nothing_show}}'
+src="http://ouao6zxy5.bkt.clouddn.com/0D55A2D5-FA50-47D3-A3DF-3394131A9A21.png"></image>

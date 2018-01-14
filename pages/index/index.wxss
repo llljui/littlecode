@@ -19,4 +19,10 @@
 .flrt{float: right;line-height: 80rpx;margin-right: 20rpx;}
 .carName{font-family: '宋体';font-size: 30rpx;}
 .picker{width: 100%;display: inline;height: 8vh;}
+.modal_bg{position: fixed;top: 0;left: 0;right: 0;bottom:0;margin: auto;width: 100vw;height: 100vh;background: #ffffff;opacity: 0.1;z-index: 99999999998;}
+.modal_bor{position: fixed;top:0vh;left: 0;right: 0;bottom:0;margin: auto;width: 370rpx;height: 288rpx;border-radius: 5px;z-index:99999999999;overflow-y: scroll;font-family: '宋体';color: #909399;line-height:8vh;padding:0 3vw;text-align: center;}
+.loadings{
+  border-radius: 5px;
+ width: 370rpx;height: 288rpx;display: block;
+}
 /** 添加自定义button点击态样式类**/

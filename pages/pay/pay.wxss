@@ -32,15 +32,18 @@ background-color: white;
 .pay_1_3{text-align: center;}
 .pay_1_4,.pay_1_5{display: block;font-family:'宋体'!important;font-size:30rpx!important;text-indent: 1em;line-height: 5vh;color: #878D99;}
 .pay_1_5{padding-bottom:1vh; }
-.paylist_{width: 92vw;margin: 0 auto;border-bottom:1px solid #D8DCE5;height: 15vh;}
+.paylist_{width: 92vw;margin: 0 auto;border-bottom:1px solid #D8DCE5;height: 10vh;}
 .header_{font-family: '微软雅黑';padding:1vh 0;color: #828282;font-size: 27rpx;}
-.methods{width: 92vw;height: 10vh;margin: 0 auto;}
-.methods>image{width: 33vw;height: 5.5vh;display: inline-block;}
+.methods{width: 92vw;height: 10vh;margin: 1vh auto;clear: both;border-top: 1px solid #ccc;paddding-top:1vh;}
+.methods>image{width: 64rpx;height: 64rpx;display: inline-block;vertical-align: bottom;}
 .pay_{font-family: '宋体';font-size: 30rpx;border-bottom: 1px solid #D8DCE5;width: 92vw;margin: 1vh auto;padding: 2vh 0 1vh 0;height: 7vh;}
-.radio{width: 25rpx;height: 25rpx;border-radius: 25rpx;border: 2px solid #acc;display: inline-block;margin-top: 24rpx;float: right;}
-.bg{background:#009BE8;}
+.radio{width: 25rpx;height: 25rpx;border-radius: 25rpx;border: 3px solid #acc;display: inline-block;margin-top: 20rpx;float: right;}
+.bg{background:#6db3ea;}
 .time{display: inline-block;width:100%;height: 5vh;line-height: 5vh;font-family: '宋体';clear: both;float: left;font-size: 28rpx;color:#909399;}
 .price{color: red;font-size: 32rpx;}
 .modal_bg{position: fixed;top: 0;left: 0;right: 0;bottom:0;margin: auto;width: 100vw;height: 100vh;background: black;opacity: 0.6;z-index: 99999999998;}
 .modal_bor{position: fixed;top: -50vh;left: 0;right: 0;bottom:0;margin: auto;width: 90vw;height: 8vh;background:white;border-radius: 5px;z-index:99999999999;transform: translateY(-20vh);opacity: 0;overflow-y: scroll;text-align: left;font-family: '宋体';color: #909399;line-height:8vh;padding:0 3vw;text-align: center;}
-.maxh{max-height: 60vh}
+.maxh{max-height: 70vh;overflow: scroll
+;}
+.wxtext{display: inline-block;text-align: left;height: 64rpx;line-height: 64rpx;margin-left: 2vw;font-family: '微软雅黑';font-size: 32rpx;}
+.line{width: 100%;height: 4px;background: #ccc;margin: 5vh 0 1vh 0;}

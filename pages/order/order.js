@@ -1,5 +1,6 @@
 Page({
   data: {
+    nothing_show:'none',
     loading:true,
     cur_color1:'#00CCFF',
     icon1:'fa-sort-down',
@@ -70,6 +71,16 @@ Page({
           cur_page: res.data.data.NextFirstRow,
           all_total: res.data.data.total
         })
+        console.log(self.data.order_list)
+        if(self.data.order_list.length<1){
+          self.setData({
+            nothing_show:'block'
+          })
+        }else{
+          self.setData({
+            nothing_show: 'none'
+          })
+        }
       }
     })
   },
@@ -154,6 +165,15 @@ Page({
                 cur_page: res.data.data.NextFirstRow,
                 all_total: res.data.data.total
               })
+              if (self.data.order_list.length < 1) {
+                self.setData({
+                  nothing_show: 'block'
+                })
+              } else {
+                self.setData({
+                  nothing_show: 'none'
+                })
+              }
             }
           })
           self.setData({
@@ -259,6 +279,15 @@ Page({
           cur_page: res.data.data.NextFirstRow,
           all_total: res.data.data.total
         })
+        if (self.data.order_list.length < 1) {
+          self.setData({
+            nothing_show: 'block'
+          })
+        } else {
+          self.setData({
+            nothing_show: 'none'
+          })
+        }
       }
     })
 //-------------------------------请求--------------------------------------------------//
